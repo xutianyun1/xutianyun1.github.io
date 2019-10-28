@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>局域网时钟同步PTP协议简介</title>
+    <url>/2019/10/28/%E5%B1%80%E5%9F%9F%E7%BD%91%E6%97%B6%E9%92%9F%E5%90%8C%E6%AD%A5PTP%E5%8D%8F%E8%AE%AE%E7%AE%80%E4%BB%8B/</url>
+    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/5b2c772f345ce21897fe5ec9ae348267_hd.jpg" alt></p>
+<a id="more"></a>
+
+<h3 id="IEEE1588-PTP-协议简介"><a href="#IEEE1588-PTP-协议简介" class="headerlink" title="IEEE1588(PTP)协议简介"></a>IEEE1588(PTP)协议简介</h3><p>​    IEEE1588协议，称作PTP(precise time protocol,  精确时间协议)，2002年发布version1，2008年发布version2。即可以用<strong>硬件</strong>实现，也可以用<strong>软件</strong>实现。当采用硬件实现时可以达到ns级的精度，采用软件实现时通常可以达到ms级精度。当在网络中采用软件实现<em>亚毫秒</em>的精度时，存在多种因素的 影响会造成时间同步的不可靠。例如：<strong>网络的不平稳性</strong>、<strong>网卡对信息包的缓存效应</strong>、<strong>操作系统进程调度的影响</strong>。</p>
+<p>​    IEEE1588v2协议提出的同步原理<strong>Delay Request-Response Mechanism（延时响应机制）</strong>如图1所示。</p>
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/PTP%E5%8D%8F%E8%AE%AE%E5%BB%B6%E8%BF%9F%E5%93%8D%E5%BA%94%E6%9C%BA%E5%88%B6.png" alt="图1 PTP协议延迟响应机制"></p>
+<p>​                                        <strong>图1 PTP协议延迟响应机制</strong></p>
+<p>图中所描述的PTP报文为一下几种：</p>
+<ul>
+<li><strong>sync 同步报文</strong></li>
+<li><strong>Follow_up 跟随报文</strong></li>
+<li><strong>Delay_req 延迟请求报文</strong></li>
+<li><strong>Delay_resp 延迟请求响应报文</strong></li>
+</ul>
+<p><strong>延迟相应同步机制</strong>的报文收发流程：</p>
+<ol>
+<li><p>主时钟<strong>周期性</strong>的发出<strong>sync</strong>报文，并记录下<strong>sync</strong>报文离开主时钟的精确发送时间<strong>t1</strong>。</p>
+<p>（如果sync在此时携带发送时间，这个发送时间并不是精确的，是预估的，在不要求精度的情况下允许这么做，称为单步同步）</p>
+</li>
+<li><p>主时钟将精确发送时间<strong>t1</strong>封装到<strong>Follow_up</strong>报文中，发送给从时钟。</p>
+</li>
+<li><p>从时钟记录<strong>sync</strong>报文到达从时钟的时间<strong>t2</strong>。</p>
+</li>
+<li><p>从时钟发出<strong>Delay_req</strong>报文并且记录下发出的时间<strong>t3</strong>。</p>
+</li>
+<li><p>主时钟记录下<strong>Delay_req</strong>报文到达主时钟的精确时间<strong>t4</strong>。</p>
+</li>
+<li><p>主时钟将<strong>t4</strong>封装到<strong>Delay_resp</strong>报文给从时钟。</p>
+</li>
+</ol>
+<p>主从时钟的差异主要是由时钟偏差和数据包在网络中传输的延迟构成。</p>
+<p><strong>时钟偏差&amp;网络延时</strong></p>
+<p>​    <strong>offset</strong>：主从时钟的时间偏差；<strong>delay</strong>：网络延时（报文在网络中传输的延时）</p>
+<p>​    经过延迟响应同步机制后，从时钟获得<strong>t1,t2,t3,t4</strong>四个精确的时间戳，可以据此计算<strong>offset</strong>和<strong>delay</strong>：</p>
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/%E6%97%B6%E9%92%9F%E5%81%8F%E5%B7%AE%E5%92%8C%E7%BD%91%E7%BB%9C%E5%BB%B6%E6%97%B6%E7%9A%84%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F.png" alt></p>
+<p>​    在从时钟中计算得到<strong>offset</strong>和<strong>delay</strong>，用<strong>current_time</strong>表示从时钟的当前时间，那么同步公式为：</p>
+<p>​    <strong>current_time = current_time - offset - delay</strong></p>
+<hr>
+<p><strong>参考</strong>：<a href="https://www.cnblogs.com/AdaminXie/p/6754644.html" target="_blank" rel="noopener">https://www.cnblogs.com/AdaminXie/p/6754644.html</a></p>
+]]></content>
+      <categories>
+        <category>车联网</category>
+      </categories>
+      <tags>
+        <tag>时钟同步</tag>
+        <tag>IEEE1588v2</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>最长回文子串（马拉车算法）</title>
     <url>/2019/08/27/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</url>
     <content><![CDATA[<p>﻿最长回文子串，即正反读起来都一样，例如“ababa”。Manacher Algorithm算法利用了回文的重复特性，让时间复杂度降为了O(n)。</p>
