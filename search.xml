@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>远程登录Oracle数据库报ORA12368:身份证明检索失败</title>
+    <url>/2019/10/31/%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95Oracle%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%A5ORA12368-%E8%BA%AB%E4%BB%BD%E8%AF%81%E6%98%8E%E6%A3%80%E7%B4%A2%E5%A4%B1%E8%B4%A5/</url>
+    <content><![CDATA[<p><img src="https://i.loli.net/2019/10/31/SKHNp6LaMGIE2oB.jpg" alt></p>
+<a id="more"></a>
+
+<p>​    之前都是连接的本地的oracle数据库，全部数据测试完毕后，打算连接服务器上的数据库时出现报错<strong>ORA12368：身份证明检索失败</strong>。</p>
+<p>​    <strong>解决方法：</strong></p>
+<p>​        找到<strong>本地</strong>安装的oracle的客户端数据的安装目录，例如我的是<strong>H:\oracleDatabase\oracleRoot\product\11.2.0\dbhome_1\NETWORK\ADMIN</strong>打开文件<strong>sqlnet.ora</strong>。</p>
+<pre><code>1. 将`SQLNET.AUTHENTICATION_SERVICES= (NTS)`注释掉`#SQLNET.AUTHENTICATION_SERVICES= (NTS)`。
+  2. 将`SQLNET.AUTHENTICATION_SERVICES= (NTS)`修改为`SQLNET.AUTHENTICATION_SERVICES= (BEQ,NONE)`。</code></pre>]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Oracle</tag>
+        <tag>服务器</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>局域网时钟同步PTP协议简介</title>
     <url>/2019/10/28/%E5%B1%80%E5%9F%9F%E7%BD%91%E6%97%B6%E9%92%9F%E5%90%8C%E6%AD%A5PTP%E5%8D%8F%E8%AE%AE%E7%AE%80%E4%BB%8B/</url>
     <content><![CDATA[<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/5b2c772f345ce21897fe5ec9ae348267_hd.jpg" alt></p>
