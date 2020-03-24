@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+  
+  <script>
+  	(function () {
+  		if ('') {
+  			if (prompt('请输入文章密码') !== '') {
+  				alert('密码错误！');
+  				if (history.length === 1) {
+  					location.replace("https://bixiaopeng0.github.io"); // 这里替换成你的首页
+  				} else {
+  					history.back();
+  				}
+  			}
+  		}
+  	})();
+  </script>
+  
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据挖掘,数据探索,EDA,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="数据挖掘,数据探索,EDA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="入门数据挖掘1-数据探索EDA">
+<meta property="og:url" content="http://yoursite.com/2020/03/24/入门数据挖掘1-数据探索EDA/index.html">
+<meta property="og:site_name" content="杀不死。">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324152822.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/1585015351116.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324183645.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324102210.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324104328.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324104401.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324183809.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324105351.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324105429.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324183902.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324183941.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324145602.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324142743.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324143930.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324150402.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324184024.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324184047.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324152822.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324153237.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324153547.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324153957.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324165722.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324154057.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324171735.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324171808.png">
+<meta property="og:updated_time" content="2020-03-24T10:44:30.162Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="入门数据挖掘1-数据探索EDA">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324152822.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/24/入门数据挖掘1-数据探索EDA/">
+
+
+
+
+
+  <title>入门数据挖掘1-数据探索EDA | 杀不死。</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	
+	
+	<a href="https://github.com/xutianyun1" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+	
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">杀不死。</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">越努力，越幸运啊。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/24/入门数据挖掘1-数据探索EDA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chris Xu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/haha.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="杀不死。">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">入门数据挖掘1-数据探索EDA</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-24T18:26:24+08:00">
+                2020-03-24
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2020-03-24T18:44:30+08:00">
+                2020-03-24
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据挖掘/" itemprop="url" rel="index">
+                    <span itemprop="name">数据挖掘</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3.6k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  15
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324152822.png" alt></p>
+<a id="more"></a>
+
+<p>[toc]</p>
+<hr>
+<h3 id="1-EDA-数据探索"><a href="#1-EDA-数据探索" class="headerlink" title="1. EDA-数据探索"></a>1. EDA-数据探索</h3><p>​        对数据进行EDA主要做的是对数据集的<strong>宏观</strong>分析， 我们要了解数据集的<strong>规模</strong>，查看数据的<strong>统计分布</strong>,了解特征之间的<strong>相关性</strong>等。</p>
+<p>​        我们为什么要做EDA，是为了能够理解数据，所以在开始地时候，我们不能抱有某种偏见，要完全正直，或者把自己当作小白去看数据，一开始，如果你什么都不知道，是对的状态。</p>
+<p>​        在数据可视化中，我们要尽量让简洁图呈现出重要的信息。</p>
+<p>​        描述<strong>趋势</strong>使用<strong>折线图</strong>；</p>
+<p>​        描述<strong>数量</strong>使用<strong>柱状图</strong>；</p>
+<p>​        描述<strong>关系</strong>使用<strong>散点图</strong>；</p>
+<p>​        描述<strong>比例</strong>使用<strong>饼状图</strong>；</p>
+<p>​        本次学习使用天池数据挖掘入门级竞赛，二手车交易价格预测<a href="https://tianchi.aliyun.com/competition/entrance/231784/information" target="_blank" rel="noopener">https://tianchi.aliyun.com/competition/entrance/231784/information</a></p>
+<h4 id="1-1-相关第三方包导入"><a href="#1-1-相关第三方包导入" class="headerlink" title="1.1 相关第三方包导入"></a>1.1 相关第三方包导入</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    导入warnings包，利用过滤器实现忽略警告语句</span></span><br><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(<span class="string">'ignore'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> missingno <span class="keyword">as</span> msno</span><br></pre></td></tr></table></figure>
+
+<p>​        pandas，numpy，matplotlib对于数据分析是非常常见的。本次任务中用到了两个新的库，<strong>seaborn</strong>，<strong>missingno</strong>，</p>
+<p>​        <strong>seaborn</strong>：是基于matplotlib的一个可视化库，相当于对底层matplotlib做了一层封装，可以用它画出更加直观、吸引人的统计图形。</p>
+<p>​        <strong>missingno</strong>：是一个用于<strong>缺失数据</strong>可视化和实用程序的小工具集，我们可以通过它直观的总结数据集的完整性。</p>
+<h4 id="1-2-载入数据"><a href="#1-2-载入数据" class="headerlink" title="1.2 载入数据"></a>1.2 载入数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    载入数据</span></span><br><span class="line">train_data = pd.read_csv(<span class="string">'../data/used_car_train_20200313.csv'</span>,sep=<span class="string">' '</span>)</span><br><span class="line">test_data = pd.read_csv(<span class="string">'../data/used_car_testA_20200313.csv'</span>,sep=<span class="string">' '</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>导入其他格式文件</strong></p>
+<table>
+<thead>
+<tr>
+<th align="right">文件格式</th>
+<th align="right">对应函数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">CSV文件</td>
+<td align="right">pd.read_csv(filename)</td>
+</tr>
+<tr>
+<td align="right">Excel文件</td>
+<td align="right">pd.read_excel(filename)</td>
+</tr>
+<tr>
+<td align="right">Mysql文件</td>
+<td align="right">pd.read_sql(query, connection_object)+</td>
+</tr>
+<tr>
+<td align="right">文本文件</td>
+<td align="right">pd.read_table(filename)</td>
+</tr>
+</tbody></table>
+<p><code>read_csv()</code>读文件默认是以<strong>逗号</strong>为分隔符，若是以其他分隔符，比如制表符<code>/t</code>，则需要在指定参数<code>sep</code>后加上指定的分隔符，本次数据集使用空格为分隔符。</p>
+<h4 id="1-3-观察数据"><a href="#1-3-观察数据" class="headerlink" title="1.3 观察数据"></a>1.3 观察数据</h4><h5 id="1-3-1-大体观察数据"><a href="#1-3-1-大体观察数据" class="headerlink" title="1.3.1 大体观察数据"></a>1.3.1 大体观察数据</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    观察数据的前部分，默认是5个，可以加参数</span></span><br><span class="line"><span class="comment">#    train_data.head(10)</span></span><br><span class="line">train_data.head()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    观察数据的后部分，默认是5个，可以加参数</span></span><br><span class="line"><span class="comment">#    train_data.tail(10)</span></span><br><span class="line">train_data.tail()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    还可以将二者综合起来一起观察</span></span><br><span class="line">train_data.head().append(train_data.tail())</span><br></pre></td></tr></table></figure>
+
+<h5 id="1-3-2-观察数据维度"><a href="#1-3-2-观察数据维度" class="headerlink" title="1.3.2 观察数据维度"></a>1.3.2 观察数据<strong>维度</strong></h5><p>这一点十分重要，不然后面模型训练很麻烦。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    管擦数据的维度</span></span><br><span class="line">train_data.shape</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    观察数据的列数</span></span><br><span class="line">train_data.shape[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    观察数据的行数</span></span><br><span class="line">train_data.shape[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<p>测试数据同样要观察，这里不再赘述，下面的笔记也都是值对train做处理，记得test数据做同杨处理即可。</p>
+<h5 id="1-3-3-观察数据的一些相关统计量"><a href="#1-3-3-观察数据的一些相关统计量" class="headerlink" title="1.3.3 观察数据的一些相关统计量"></a>1.3.3 观察数据的一些相关统计量</h5><p>例如总数，平均值，标准差，最小值，25%、50%、75%分数，最大值等。我们可以通过观察某些值提前选定某些异常值或缺失值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    通过describe()来熟悉数据的相关统计量</span></span><br><span class="line">train_data.describe()</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/1585015351116.png" alt></p>
+<h5 id="1-3-4-通过info-来熟悉数据类型"><a href="#1-3-4-通过info-来熟悉数据类型" class="headerlink" title="1.3.4 通过info()来熟悉数据类型"></a>1.3.4 通过<code>info()</code>来熟悉数据类型</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_data.info()</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324183645.png" alt></p>
+<p>像本此数据，我们可以知道更多的都是数字类型，又可以细分为整型和浮点型，但是值得注意的是有一个数据类型是<code>object</code>。那这个<code>object</code>到底是个啥呢，看下表</p>
+<table>
+<thead>
+<tr>
+<th>:pandas dtype</th>
+<th>:-python类型</th>
+<th>:-numpy类型</th>
+<th>:-用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>object</td>
+<td>str</td>
+<td>string, unicode</td>
+<td>文本</td>
+</tr>
+<tr>
+<td>int64</td>
+<td>int</td>
+<td>int, int8, int16, int32, int64, uint8, uint16, uint32, uint64</td>
+<td>整数</td>
+</tr>
+<tr>
+<td>float64</td>
+<td>float</td>
+<td>float，float16，float32，float64</td>
+<td>浮点数</td>
+</tr>
+<tr>
+<td>bool</td>
+<td>bool</td>
+<td>bool</td>
+<td>布尔值</td>
+</tr>
+<tr>
+<td>datetime64</td>
+<td>NA</td>
+<td>NA</td>
+<td>日期时间</td>
+</tr>
+<tr>
+<td>timedelta[ns]</td>
+<td>NA</td>
+<td>NA</td>
+<td>时间差</td>
+</tr>
+<tr>
+<td>category</td>
+<td>NA</td>
+<td>NA</td>
+<td>有限长度的文本值列表</td>
+</tr>
+</tbody></table>
+<h5 id="1-3-5-查看每列的存在的nan情况"><a href="#1-3-5-查看每列的存在的nan情况" class="headerlink" title="1.3.5 查看每列的存在的nan情况"></a>1.3.5 查看每列的存在的nan情况</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    查看每列的存在nan情况</span></span><br><span class="line">train_data.isnull().sum()</span><br></pre></td></tr></table></figure>
+
+<p>从这里我们可以知道数据集的某些特征有多少缺失值，对于缺失值的处理也十分重要。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    对缺失值可视化</span></span><br><span class="line"></span><br><span class="line">missing= train_data.isnull().sum()</span><br><span class="line">missing = missing[missing &gt; <span class="number">0</span>]</span><br><span class="line">missing.sort_values(inplace=<span class="literal">True</span>)</span><br><span class="line">missing.plot.bar()</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324102210.png" alt></p>
+<ol>
+<li>如果缺失值的数量很小，一般选择进行填充，当然如果你使用<code>lgb</code>等树模型，可以不做处理，模型会自动优化</li>
+<li>如果缺失值的数量很大，过多，那么我们一般考虑将其删掉，观察模型的得分情况如何。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    可视化看下缺省值</span></span><br><span class="line">msno.matrix(train_data.sample(<span class="number">250</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324104328.png" alt></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msno.bar(train_data.sample(<span class="number">1000</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324104401.png" alt></p>
+<h5 id="1-3-6-异常值检测"><a href="#1-3-6-异常值检测" class="headerlink" title="1.3.6 异常值检测"></a>1.3.6 异常值检测</h5><p>从上面我们可以知道<code>notRepairedDamage</code>的数据类型不是数字，因此我们先来分析此特征。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_data[<span class="string">'notRepairedDamage'</span>].value_counts()</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324183809.png" alt></p>
+<p>可以看到该特征有个取值是’-‘，我们可以将其认为为缺失值，替换为<code>nan</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    将-替换为nan</span></span><br><span class="line">train_data[<span class="string">'notRepairedDamage'</span>].replace(<span class="string">'-'</span>, np.nan, inplace=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>对于<code>seller</code>和<code>offerType</code>这两个特征严重倾斜，对预测结果的意义不大，因此我们可以直接将其删除掉。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">del</span> train_data[<span class="string">'seller'</span>]</span><br><span class="line"><span class="keyword">del</span> train_data[<span class="string">'offerType'</span>]</span><br></pre></td></tr></table></figure>
+
+<h5 id="1-3-7-了解预测值分布"><a href="#1-3-7-了解预测值分布" class="headerlink" title="1.3.7 了解预测值分布"></a>1.3.7 了解预测值分布</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_data[<span class="string">'price'</span>]</span><br></pre></td></tr></table></figure>
+
+<p>我们通过观察预测值，可以知道这是一个分类任务还是回归任务，本此数据集，显然是一个回归任务。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_data[<span class="string">'price'</span>].value_counts()</span><br></pre></td></tr></table></figure>
+
+<p>预测值的总体分布概况</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    总体分布概况</span></span><br><span class="line"><span class="keyword">import</span> scipy.stats <span class="keyword">as</span> st</span><br><span class="line">y = train_data[<span class="string">'price'</span>]</span><br><span class="line">plt.figure(<span class="number">1</span>);plt.title(<span class="string">'Johnson SU'</span>)</span><br><span class="line">sns.distplot(y, kde=<span class="literal">False</span>, fit=st.johnsonsu)</span><br><span class="line">plt.figure(<span class="number">2</span>);plt.title(<span class="string">'Normal'</span>)</span><br><span class="line">sns.distplot(y, kde=<span class="literal">False</span>, fit=st.norm)</span><br><span class="line">plt.figure(<span class="number">3</span>);plt.title(<span class="string">'Log Normal'</span>)</span><br><span class="line">sns.distplot(y, kde=<span class="literal">False</span>, fit=st.lognorm)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324105351.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324105429.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324183902.png" alt></p>
+<p>​        <strong>约翰逊分布</strong>是经过约翰变换后服从正态分布的随机变量的概率分布<br>​        <code>displot()</code>集合了<code>matplotlib</code>的<code>hist()</code>与核函数估计<code>kdeplot</code>的功能，增加了<code>rugplot</code>分布观测条显示与利用<code>scipy</code>库<code>fit</code>拟合参数分布的新颖功能  </p>
+<p>​        从图可以知道，价格很明显是不符合正态分布的，所在在进行回归之前，必须进行转换。最佳拟合无界约翰逊分布。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#    查看预测值的具体频数</span><br><span class="line">plt.hist(train_data[&apos;price&apos;], orientation=&apos;vertical&apos;,histtype=&apos;bar&apos;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324183941.png" alt></p>
+<p>从图中可以看出0到20000的取值占了绝大部分。因此，我们在做模型训练的时候，可以将其视作一条<strong>规则</strong>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    对数变换后观察分布、</span></span><br><span class="line">plt.hist(np.log(train_data[<span class="string">'price'</span>]), orientation=<span class="string">'vertical'</span>, histtype=<span class="string">'bar'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324145602.png" alt></p>
+<p>值得注意的是，经过对数变换后，分布较为均匀，有点<strong>正态</strong>分布的意思了。</p>
+<h5 id="1-3-7查看峰度和偏度"><a href="#1-3-7查看峰度和偏度" class="headerlink" title="1.3.7查看峰度和偏度"></a>1.3.7查看峰度和偏度</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    查看偏度和峰度</span></span><br><span class="line">sns.distplot(train_data[<span class="string">'price'</span>]);</span><br><span class="line">print(<span class="string">'Skewness: %f'</span> % train_data[<span class="string">'price'</span>].skew())</span><br><span class="line">print(<span class="string">'Kurtness: %f'</span> % train_data[<span class="string">'price'</span>].kurt())</span><br></pre></td></tr></table></figure>
+
+<p><strong>偏度</strong>：偏度（skewness）也称为偏态、偏态系数，是统计数据分布<strong>偏斜</strong>方向和程度的度量，是统计数据分布<strong>非对称</strong>程度的数字特征  </p>
+<p><strong>峰度</strong>：峰度（Kurtosis）与偏度类似，是描述总体中所有取值分布形态陡缓程度的统计量。这个统计量需要与正态分布相比较，峰度为0表示该总体数据分布与正态分布的陡缓程度相同；峰度大于0表示该总体数据分布与正态分布相比较为陡峭，为尖顶峰；峰度小于0表示该总体数据分布与正态分布相比较为平坦，为平顶峰。峰度的绝对值数值越大表示其分布形态的陡缓程度与正态分布的差异程度越大</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    查看所有特征的峰度和偏度</span></span><br><span class="line">train_data.skew(), train_data.kurt()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    可视化偏度</span></span><br><span class="line">sns.distplot(train_data.skew(), color=<span class="string">'blue'</span>, axlabel=<span class="string">'Skewness'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324142743.png" alt></p>
+<p>横坐标是偏度，纵坐标是该偏度值在总体 样本中占的百分比，从图中可以看出，-10~10的偏度更多一些，尤其是0附近的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    可视化峰度</span></span><br><span class="line">sns.distplot(train_data.kurt(), color=<span class="string">'orange'</span>, axlabel=<span class="string">'Kurtness'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324143930.png" alt></p>
+<h4 id="1-4-对特征分类观察分析"><a href="#1-4-对特征分类观察分析" class="headerlink" title="1.4 对特征分类观察分析"></a>1.4 对特征分类观察分析</h4><p>特征可以分类为<strong>数字</strong>特征和<strong>类别</strong>特征，这两者既有联系也有区别，我们需要将其分类观察分析。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    将特征进行分类</span></span><br><span class="line">numeric_features = [<span class="string">'power'</span>, <span class="string">'kilometer'</span>, <span class="string">'v_0'</span>,<span class="string">'v_1'</span>,<span class="string">'v_2'</span>,<span class="string">'v_3'</span>,<span class="string">'v_4'</span>,<span class="string">'v_5'</span>,<span class="string">'v_6'</span>,<span class="string">'v_7'</span>,<span class="string">'v_8'</span>,<span class="string">'v_9'</span>,<span class="string">'v_10'</span>,<span class="string">'v_11'</span>,<span class="string">'v_12'</span>,<span class="string">'v_13'</span>,<span class="string">'v_14'</span>]</span><br><span class="line"></span><br><span class="line">categorical_features = [ n <span class="keyword">for</span> n <span class="keyword">in</span> list(train_data.columns.values) <span class="keyword">if</span> n <span class="keyword">not</span> <span class="keyword">in</span> numeric_features ]</span><br></pre></td></tr></table></figure>
+
+<h5 id="1-4-1-数字特征分析"><a href="#1-4-1-数字特征分析" class="headerlink" title="1.4.1 数字特征分析"></a>1.4.1 数字特征分析</h5><h6 id="1-4-1-1-相关性分析"><a href="#1-4-1-1-相关性分析" class="headerlink" title="1.4.1.1 相关性分析"></a>1.4.1.1 相关性分析</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    观察数字特征和预测值的相关性</span></span><br><span class="line">price_numeric = train_data[numeric_features]</span><br><span class="line">correlation = price_numeric.corr()</span><br><span class="line">print(correlation[<span class="string">'price'</span>].sort_values(ascending=<span class="literal">False</span>),<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324150402.png" alt></p>
+<p>​        相关性分析是量化不同因素间变动状况一致程度的重要指标。相关程度高的特征是我们希望要的，因为相关程度越高，越说明该特征对预测结果更有帮助。<br>​        相关系数corr，取值在<strong>[-1,1]</strong>。corr值越大，不用因素之间的相关程度越高，<strong>负值表示负相关</strong>，<strong>正值表示正相关</strong><br>​        算法有很多，最常用是Pearson相关系数，还有Spearman相关系数和Kendall相关系数</p>
+<ol>
+<li><strong>Pearson相关系数</strong></li>
+</ol>
+<p>计算公式:<img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324184024.png" alt></p>
+<p>Numpy和Pandas都提供了Pearson相关系数的计算函数分别是<code>np.corrcoef()</code>和<code>Pandas.corr()</code>。</p>
+<ol start="2">
+<li><strong>向量夹角余弦</strong></li>
+</ol>
+<p>把两组数据作为两个一维向量，通过计算两个向量的夹角余弦值，同样可以衡量数据的相关程度，取值范围在[-1，1]之间，</p>
+<p>计算公式：<img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324184047.png" alt></p>
+<ol start="3">
+<li><p><strong>Spearman相关系数</strong></p>
+<p>Spearman相关系数又称秩相关系数，是利用两变量的<strong>秩次大小</strong>做相关性分析，对原始变量的分布不做要求，也没有线性要求。</p>
+<p>Scipy的<code>spearmanr()</code>函数可以计算Spearman相关系数</p>
+<p>Spearman相关系数有如下特点:</p>
+<ul>
+<li>属于非参数统计方法，适用范围更广。</li>
+<li>对于服从Pearson相关系数的数据亦可计算Spearman相关系数，但统计效能要低一些。</li>
+<li>秩次：样本数据正向排序后的序号（从1开始）</li>
+</ul>
+</li>
+<li><p><strong>kendall相关系数</strong></p>
+<p>肯德尔秩相关系数也是一种秩相关系数，但是他所计算的对象是<strong>分类有序/等级</strong>变量，比如考试名次等。</p>
+<p>特点：</p>
+<ul>
+<li>如果两组排名是相同的，系数为1 ，两个属性正相关。</li>
+<li>如果两组排名完全相反，系数为-1 ，两个属性负相关。</li>
+<li>如果两组排名是完全独立的，系数为0。</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    两两特征间的相关性分析</span></span><br><span class="line">f, ax = plt.subplots(figsize=(<span class="number">7</span>,<span class="number">7</span>))</span><br><span class="line">plt.title(<span class="string">'Correlation of Numeric Features with Price'</span>,y=<span class="number">1</span>,size=<span class="number">16</span>)</span><br><span class="line">sns.heatmap(correlation,square=<span class="literal">True</span>,vmax=<span class="number">0.8</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324152822.png" alt></p>
+<h6 id="1-4-1-2-数字特征分布可视化"><a href="#1-4-1-2-数字特征分布可视化" class="headerlink" title="1.4.1.2 数字特征分布可视化"></a>1.4.1.2 数字特征分布可视化</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">del</span> price_numeric[<span class="string">'price'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#    查看几个特征的偏度和峰度</span></span><br><span class="line"><span class="keyword">for</span> col <span class="keyword">in</span> numeric_features:</span><br><span class="line">    print(<span class="string">'&#123;:15&#125;'</span>.format(col),</span><br><span class="line">          <span class="string">'Skewness: &#123;:05.2f&#125;'</span>.format(train_data[col].skew()),</span><br><span class="line">          <span class="string">' '</span>,</span><br><span class="line">          <span class="string">'Kurtosis: &#123;:06.2f&#125;'</span>.format(train_data[col].kurt())</span><br><span class="line">         )</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    每个数字特征的分布可视化</span></span><br><span class="line">f = pd.melt(train_data, value_vars=numeric_features)</span><br><span class="line">g = sns.FacetGrid(f, col=<span class="string">'variable'</span>, col_wrap=<span class="number">2</span>, sharex=<span class="literal">False</span>, sharey=<span class="literal">False</span>)</span><br><span class="line">g = g.map(sns.distplot, <span class="string">'value'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>（图太长了，略略略）</p>
+<p>我们可以从图得出一些结论，例如他在那几个主要的值分布的较多，后期，我们可以尝试做分箱处理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    数字特征相互之间的关系可视化</span></span><br><span class="line">sns.set()</span><br><span class="line">columns = [<span class="string">'price'</span>, <span class="string">'v_12'</span>,<span class="string">'v_8'</span>,<span class="string">'power'</span>,<span class="string">'v_5'</span>,<span class="string">'v_2'</span>,<span class="string">'v_6'</span>,<span class="string">'v_1'</span>,<span class="string">'v_14'</span>]</span><br><span class="line">sns.pairplot(train_data[columns], size=<span class="number">2</span>, kind=<span class="string">'scatter'</span>, diag_kind=<span class="string">'kde'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324153237.png" alt></p>
+<p>我们可以根据特征之间的相关行，进行特征的筛选，如果两个特征呈现正相关，我们就应该删去一个特征以简化模型。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    多变量互相回归关系可视化</span></span><br><span class="line">fig, ((ax1, ax2), (ax3, ax4), (ax5, ax6), (ax7, ax8), (ax9, ax10)) = plt.subplots(nrows=<span class="number">5</span>, ncols=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">v_12_sactter_plot = pd.concat([Y_train, train_data[<span class="string">'v_12'</span>]], axis=<span class="number">1</span>)</span><br><span class="line">sns.regplot(x=<span class="string">'v_12'</span>,y=<span class="string">'price'</span>,data=v_12_sactter_plot, scatter=<span class="literal">True</span>, fit_reg=<span class="literal">True</span>, ax=ax1)</span><br><span class="line"></span><br><span class="line">v_8_sactter_plot = pd.concat([Y_train, train_data[<span class="string">'v_8'</span>]], axis=<span class="number">1</span>)</span><br><span class="line">sns.regplot(x=<span class="string">'v_8'</span>,y=<span class="string">'price'</span>,data=v_8_sactter_plot, scatter=<span class="literal">True</span>, fit_reg=<span class="literal">True</span>, ax=ax2)</span><br><span class="line"></span><br><span class="line">v_0_sactter_plot = pd.concat([Y_train, train_data[<span class="string">'v_0'</span>]], axis=<span class="number">1</span>)</span><br><span class="line">sns.regplot(x=<span class="string">'v_0'</span>,y=<span class="string">'price'</span>,data=v_0_sactter_plot, scatter=<span class="literal">True</span>, fit_reg=<span class="literal">True</span>, ax=ax3)</span><br><span class="line"></span><br><span class="line">power_sactter_plot = pd.concat([Y_train, train_data[<span class="string">'power'</span>]], axis=<span class="number">1</span>)</span><br><span class="line">sns.regplot(x=<span class="string">'power'</span>,y=<span class="string">'price'</span>,data=power_sactter_plot, scatter=<span class="literal">True</span>, fit_reg=<span class="literal">True</span>, ax=ax4)</span><br><span class="line"></span><br><span class="line">v_5_sactter_plot = pd.concat([Y_train, train_data[<span class="string">'v_5'</span>]], axis=<span class="number">1</span>)</span><br><span class="line">sns.regplot(x=<span class="string">'v_5'</span>,y=<span class="string">'price'</span>,data=v_5_sactter_plot, scatter=<span class="literal">True</span>, fit_reg=<span class="literal">True</span>, ax=ax5)</span><br><span class="line"></span><br><span class="line">v_2_sactter_plot = pd.concat([Y_train, train_data[<span class="string">'v_2'</span>]], axis=<span class="number">1</span>)</span><br><span class="line">sns.regplot(x=<span class="string">'v_2'</span>,y=<span class="string">'price'</span>,data=v_2_sactter_plot, scatter=<span class="literal">True</span>, fit_reg=<span class="literal">True</span>, ax=ax6)</span><br><span class="line"></span><br><span class="line">v_6_sactter_plot = pd.concat([Y_train, train_data[<span class="string">'v_6'</span>]], axis=<span class="number">1</span>)</span><br><span class="line">sns.regplot(x=<span class="string">'v_6'</span>,y=<span class="string">'price'</span>,data=v_6_sactter_plot, scatter=<span class="literal">True</span>, fit_reg=<span class="literal">True</span>, ax=ax7)</span><br><span class="line"></span><br><span class="line">v_1_sactter_plot = pd.concat([Y_train, train_data[<span class="string">'v_1'</span>]], axis=<span class="number">1</span>)</span><br><span class="line">sns.regplot(x=<span class="string">'v_1'</span>,y=<span class="string">'price'</span>,data=v_1_sactter_plot, scatter=<span class="literal">True</span>, fit_reg=<span class="literal">True</span>, ax=ax8)</span><br><span class="line"></span><br><span class="line">v_14_sactter_plot = pd.concat([Y_train, train_data[<span class="string">'v_14'</span>]], axis=<span class="number">1</span>)</span><br><span class="line">sns.regplot(x=<span class="string">'v_14'</span>,y=<span class="string">'price'</span>,data=v_14_sactter_plot, scatter=<span class="literal">True</span>, fit_reg=<span class="literal">True</span>, ax=ax9)</span><br><span class="line"></span><br><span class="line">v_13_sactter_plot = pd.concat([Y_train, train_data[<span class="string">'v_13'</span>]], axis=<span class="number">1</span>)</span><br><span class="line">sns.regplot(x=<span class="string">'v_13'</span>,y=<span class="string">'price'</span>,data=v_13_sactter_plot, scatter=<span class="literal">True</span>, fit_reg=<span class="literal">True</span>, ax=ax10)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324153547.png" alt></p>
+<h5 id="1-4-2-类别特征分析"><a href="#1-4-2-类别特征分析" class="headerlink" title="1.4.2 类别特征分析"></a>1.4.2 类别特征分析</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 2) 类别特征箱形图可视化</span></span><br><span class="line"><span class="comment"># 因为 name和 regionCode的类别太稀疏了，这里我们把不稀疏的几类画一下</span></span><br><span class="line">categorical_features = [<span class="string">'model'</span>, <span class="string">'brand'</span>, <span class="string">'bodyType'</span>, <span class="string">'fuelType'</span>, <span class="string">'gearbox'</span>, <span class="string">'notRepairedDamage'</span>] </span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> categorical_features:    </span><br><span class="line">    train_data[c] = train_data[c].astype(<span class="string">'category'</span>)    </span><br><span class="line">    <span class="keyword">if</span> train_data[c].isnull().any():        </span><br><span class="line">        train_data[c] = train_data[c].cat.add_categories([<span class="string">'MISSING'</span>])        </span><br><span class="line">        train_data[c] = train_data[c].fillna(<span class="string">'MISSING'</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">boxplot</span><span class="params">(x, y, **kwargs)</span>:</span>    </span><br><span class="line">    sns.boxplot(x=x, y=y)    </span><br><span class="line">    x=plt.xticks(rotation=<span class="number">90</span>)</span><br><span class="line">    </span><br><span class="line">f = pd.melt(train_data, id_vars=[<span class="string">'price'</span>], value_vars=categorical_features) </span><br><span class="line">g = sns.FacetGrid(f, col=<span class="string">"variable"</span>,  col_wrap=<span class="number">2</span>, sharex=<span class="literal">False</span>, sharey=<span class="literal">False</span>, size=<span class="number">5</span>) </span><br><span class="line">g = g.map(boxplot, <span class="string">"value"</span>, <span class="string">"price"</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324153957.png" alt></p>
+<p><strong>箱型图</strong>最大的优点就是不受异常值的影响，可以以一种相对稳定的方式藐视数据的离散分布情况，也利于数据的清洗。</p>
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324165722.png" alt></p>
+<p>下四分位数Q1、中位数Q2、上四分位数Q3计算方法：Qi所在的位置=i*(n+1)/4</p>
+<p>上限是<strong>非异常范围</strong>的最大值，四分位距IQR=Q3-Q1,那么上限=Q3 + 1.5IQR</p>
+<p>下限是<strong>非异常范围</strong>的最小值，下限=Q1-1.5IQR</p>
+<ol>
+<li><p>直观明了地识别数据批中的<strong>异常值</strong></p>
+<p>​    箱线图判断异常值的标准以四分位数和四分位距为基础，四分位数具有一定的<strong>耐抗性</strong>，就是多大25%的数据可以变的任意元而不会很大地扰动四分位数，所以异常值不会影响箱型图地数据形状。</p>
+</li>
+<li><p>利用箱线图判断数据集地<strong>偏态</strong>和<strong>尾重</strong></p>
+<p>​    异常值越多说明尾部越重，自由度越小。</p>
+<p>​    偏态表示偏离程度，异常值集中在较小值一侧，则分布呈左偏态；异常值集中在较大值一侧，则分布 呈👉偏态。</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    类别特征的小提琴图可视化</span></span><br><span class="line">catg_list = categorical_features</span><br><span class="line">target = <span class="string">'price'</span></span><br><span class="line"><span class="keyword">for</span> catg <span class="keyword">in</span> catg_list:</span><br><span class="line">    sns.violinplot(x=catg, y=target, data=train_data)</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324154057.png" alt></p>
+<p><strong>小提琴图</strong>用来展示类别变量地值地分布情况，宽的地方数据分布多。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    类别特征的柱形图可视化</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bar_plot</span><span class="params">(x,y,**kwargs)</span>:</span></span><br><span class="line">    sns.barplot(x=x,y=y)</span><br><span class="line">    x=plt.xticks(rotation=<span class="number">90</span>)</span><br><span class="line">    </span><br><span class="line">f = pd.melt(train_data, id_vars=[<span class="string">'price'</span>], value_vars=categorical_features)</span><br><span class="line">g = sns.FacetGrid(f, col=<span class="string">'variable'</span>, col_wrap=<span class="number">2</span>, sharex=<span class="literal">False</span>, sharey=<span class="literal">False</span>, size=<span class="number">5</span>)</span><br><span class="line">g = g.map(bar_plot, <span class="string">'value'</span>, <span class="string">'price'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324171735.png" alt></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    类别特征的每个类别频数可视化</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">count_plot</span><span class="params">(x, **kwargs)</span>:</span></span><br><span class="line">    sns.countplot(x=x)</span><br><span class="line">    x=plt.xticks(rotation=<span class="number">90</span>)</span><br><span class="line">    </span><br><span class="line">f = pd.melt(train_data, value_vars=categorical_features)</span><br><span class="line">g = sns.FacetGrid(f, col=<span class="string">'variable'</span>, col_wrap=<span class="number">2</span>, sharex=<span class="literal">False</span>, sharey=<span class="literal">False</span>, size=<span class="number">5</span>)</span><br><span class="line">g = g.map(count_plot, <span class="string">'value'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200324171808.png" alt></p>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+	<div>
+		
+			
+<div style="text-align:center;color: #ccc;font-size:14px;">
+------ 本文结束 ------</div>
+
+
+		
+	</div>
+
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据挖掘/" rel="tag"># 数据挖掘</a>
+          
+            <a href="/tags/数据探索/" rel="tag"># 数据探索</a>
+          
+            <a href="/tags/EDA/" rel="tag"># EDA</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/3019/11/07/去努力维护心中的那点正义/" rel="prev" title="去努力维护心中的那点正义">
+                <i class="fa fa-chevron-left"></i> 去努力维护心中的那点正义
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/31/远程登录Oracle数据库报ORA12368-身份证明检索失败/" rel="next" title="远程登录Oracle数据库报ORA12368:身份证明检索失败">
+                远程登录Oracle数据库报ORA12368:身份证明检索失败 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/haha.jpg" alt="Chris Xu">
+            
+              <p class="site-author-name" itemprop="name">Chris Xu</p>
+              <p class="site-description motion-element" itemprop="description">越努力，越幸运啊。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xutianyun1" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xutianyunch@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-EDA-数据探索"><span class="nav-number">1.</span> <span class="nav-text">1. EDA-数据探索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-相关第三方包导入"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 相关第三方包导入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-载入数据"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 载入数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-观察数据"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 观察数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-1-大体观察数据"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.3.1 大体观察数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-2-观察数据维度"><span class="nav-number">1.3.2.</span> <span class="nav-text">1.3.2 观察数据维度</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-3-观察数据的一些相关统计量"><span class="nav-number">1.3.3.</span> <span class="nav-text">1.3.3 观察数据的一些相关统计量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-4-通过info-来熟悉数据类型"><span class="nav-number">1.3.4.</span> <span class="nav-text">1.3.4 通过info()来熟悉数据类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-5-查看每列的存在的nan情况"><span class="nav-number">1.3.5.</span> <span class="nav-text">1.3.5 查看每列的存在的nan情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-6-异常值检测"><span class="nav-number">1.3.6.</span> <span class="nav-text">1.3.6 异常值检测</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-7-了解预测值分布"><span class="nav-number">1.3.7.</span> <span class="nav-text">1.3.7 了解预测值分布</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-7查看峰度和偏度"><span class="nav-number">1.3.8.</span> <span class="nav-text">1.3.7查看峰度和偏度</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-对特征分类观察分析"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 对特征分类观察分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-4-1-数字特征分析"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.4.1 数字特征分析</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-4-1-1-相关性分析"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">1.4.1.1 相关性分析</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#1-4-1-2-数字特征分布可视化"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">1.4.1.2 数字特征分布可视化</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-4-2-类别特征分析"><span class="nav-number">1.4.2.</span> <span class="nav-text">1.4.2 类别特征分析</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chris Xu</span>
+
+  
+</div>
+
+
+<!--  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+-->
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
