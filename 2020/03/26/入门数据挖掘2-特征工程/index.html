@@ -113,7 +113,14 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200326165132.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200326191659.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200326145523.png">
-<meta property="og:updated_time" content="2020-03-28T12:28:53.428Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200327101454.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200327101558.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200327111633.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200327111712.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200327111925.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200327112004.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200328202046.png">
+<meta property="og:updated_time" content="2020-03-28T12:35:56.603Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="入门数据挖掘2-特征工程">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200326155723.png">
@@ -359,7 +366,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2020-03-28T20:28:53+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2020-03-28T20:35:56+08:00">
                 2020-03-28
               </time>
             
@@ -409,7 +416,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  3.4k
+                  3.3k
                 </span>
               
 
@@ -452,8 +459,7 @@
 <p>[toc]</p>
 <hr>
 <h3 id="2-特征工程"><a href="#2-特征工程" class="headerlink" title="2.  特征工程"></a>2.  特征工程</h3><p>​        常见的特征工程包括</p>
-<ol>
-<li><p>异常处理：</p>
+<p>​    1. 异常处理：</p>
 <ul>
 <li><p>通过箱线图（或3-Sigma）分析删除异常值</p>
 <blockquote>
@@ -470,11 +476,11 @@
 </blockquote>
 </li>
 <li><p>长尾截断</p>
+</li>
+</ul>
 <ol start="2">
 <li>特征归一化/标准化</li>
 </ol>
-</li>
-</ul>
 <p>优点</p>
 <ul>
 <li><p>标准化（转换为标准正态分布）</p>
@@ -494,206 +500,162 @@
 <blockquote>
 <p>非线性归一化：使用log、tanh等，经常用在数据分化较大的场景，有些数值很大，有些很小，通过一些数学函数，将原始值进行映射。</p>
 </blockquote>
+</li>
+</ul>
 <ol start="3">
 <li>数据分箱：</li>
 </ol>
-</li>
-</ul>
 <p>​        数据分箱是一种数据预处理技术，用于减少次要观察误差的影响，是一种将多个连续值分组为较少数量的分箱方法。这种对连续变量离散化后，模型会更稳定，同时也降低了模型过拟合的风险。</p>
 <ul>
-<li><p><strong>等频分箱</strong>：区间的边界要经过选择，使得每个区间包含大致相等的示例数量。</p>
+<li><strong>等频分箱</strong>：区间的边界要经过选择，使得每个区间包含大致相等的示例数量。</li>
+<li><strong>等距分箱</strong>：从最小值到最大值之间，均分为N等份，每个区间长度为<code>W=(max-min)/N。</code></li>
+<li><strong>Best-KS分箱</strong>：</li>
+<li><strong>卡方分箱</strong>：自底向上的数据离散化方法。它依赖于卡方检验，将具有最小卡方值的相邻区间合并在一起，知道满足确定的停止准则。</li>
+</ul>
+<ol start="4">
+<li>缺失值处理：</li>
+</ol>
+<ul>
+<li>不处理，如果使用LGB等树模型</li>
+<li>删除，如果缺失数量太多</li>
+<li>插值补全，包括均值/中位数/众数/建模预测/多重插补/压缩感知补全/矩阵补全等</li>
+<li>利用先验知识填充</li>
+<li>分箱，将缺失值单独分为一个箱</li>
+</ul>
+<ol start="5">
+<li>特征构造：</li>
+</ol>
+<ul>
+<li><p>构造<strong>统计量</strong>特征，包括<strong>计数</strong>，<strong>求和</strong>，<strong>比例</strong>，<strong>标准差</strong>等一些统计量</p>
 </li>
-<li><p><strong>等距分箱</strong>：从最小值到最大值之间，均分为N等份，每个区间长度为<code>W=(max-min)/N。</code></p>
+<li><p><strong>时间</strong>特征，包括相对时间和绝对是件，节假日，双休日等</p>
 </li>
-<li><p><strong>Best-KS分箱</strong>：</p>
+<li><p><strong>地理信息</strong>，包括分箱，分布编码等方法，</p>
 </li>
-<li><p><strong>卡方分箱</strong>：自底向上的数据离散化方法。它依赖于卡方检验，将具有最小卡方值的相邻区间合并在一起，知道满足确定的停止准则。</p>
+<li><p><strong>非线性变换</strong>，包括log/平发/根号等</p>
+</li>
+<li><p><strong>特征组合</strong>，<strong>特征交叉</strong></p>
+<blockquote>
+<p>特征组合也叫做特征交叉，但是<strong>合成特征</strong>和特征组合不太一样，特称交叉可以理解为特征组合的一个子集。</p>
+<p><strong>合成特征</strong>：一种特征，不在输入特征之列，而是从一个或多个输入特征衍生而来。通过标准化或缩放单独创建的特征不属于合成特征。</p>
+<p>​    包括以下几种类型：</p>
+<pre><code>1. 将一个特征与其本身或其他特征相乘
+   2. 两个特征相除
+      3. 对连续特征进行分箱。</code></pre><p><strong>特称组合</strong>：通过将单独的特征进行组合（相乘或求笛卡尔积）而形成的合成特征。特征组合有助于表示非线性关系。</p>
+</blockquote>
 </li>
 </ul>
+<ol start="6">
+<li>特征筛选：</li>
+</ol>
+<ul>
+<li><p><strong>过滤式</strong>（filter）：按照发散性或相关性对各个特征进行评分，设定阈值或者待选择特征的个数进行筛选</p>
+<blockquote>
+<p>基本想法： 分别对每个特征xi，计算xi相对于类别标签y的信息量S(i)，得到n个结果。然后将n个S(i)按照从大到小排序，输出前k个特征。我们的目标是选取与y关联最密切的一些特征xi，那么使用什么样的方法来度量S(i)是一个关键问题。</p>
+<p>主要有一下几种方法：</p>
+<ol>
+<li>Pearson相关系数</li>
+<li>卡方验证</li>
+<li>互信息和最大信息系数</li>
+<li>距离相关系数</li>
+<li>方差选择法</li>
+</ol>
+</blockquote>
+</li>
+<li><p><strong>包裹式</strong>（wrapper）: 根据目标函数（往往是预测效果评分），每次选择若干特征，或者排除若干特征</p>
+<blockquote>
+<p>基本思想：基于hold-out方法，对于每一个待选的特征子集，都在训练集上训练一遍模型，然后在测试集上根据误差大小选择出特征子集。</p>
+<p>贪婪搜索算法：是局部最优算法。与之对应的是穷举算法，穷举算法是遍历所有可能的组合达到全局最优，但是不太实际</p>
+<ol>
+<li><strong>前向搜索</strong>：每次增量的从剩余未选中的特征选出一个加入到特征集中，待达到阈值或者n时，从所有F中选出得分最高的特征集。</li>
+<li><strong>后向搜索</strong>：先将F设置为包含全部特征的特征集，然后每次增量的减去特征，直到达到阈值或者为空是，选择最佳的特征集。</li>
+<li><strong>递归特征消除法</strong>：使用一个<strong>基模型</strong>进行多轮训练，每轮训练后通过学习器返回的coef_或者feature_importances_消除哪些权重较底的特征，再基于新的特征集进行下一轮训练。</li>
+</ol>
+</blockquote>
+</li>
+<li><p><strong>嵌入式</strong>（embedding）：先使用某些机器学习的模型进行训练，得到各个特征的权值系数，根据系数从大到小选择特征（类似于Filter，只不过系数是通过训练得来的）</p>
+<blockquote>
+<ul>
+<li>基于惩罚项的特征选择法   通过L1正则项来选择特征：L1正则方法具有稀疏解的特性，因此天然具备特征选择的特性。值得注意的是，L1没有选到的特征不代表不重要，原因是两个具有高相关性的特征可能只保留了一个，如果要确定哪个特征重要需要再通过L2正则方法交叉检验。</li>
+<li>基于学习模型的特征排序   这种方法的思路是直接使用你要用的机器学习算法，针对每个单独的特征和响应变量建立预测模型。假如某个特征和响应变量之间的关系是非线性的，可以用基于树的方法（决策树、随机森林）、或者扩展的线性模型等。基于树的方法比较易于使用，因为他们对非线性关系的建模比较好，并且不需要太多的调试。但要注意过拟合问题，因此树的深度最好不要太大，再就是运用交叉验证。通过这种训练对特征进行打分获得相关性后再训练最终模型。</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<ol start="7">
+<li><p>降维</p>
+<p>如果你最后特征工程走一遍下来，特征很多的话，最后进行以下降维.</p>
 </li>
 </ol>
-<pre><code>   4. 缺失值处理：
-
-+ 不处理，如果使用LGB等树模型
-+ 删除，如果缺失数量太多
-+ 插值补全，包括均值/中位数/众数/建模预测/多重插补/压缩感知补全/矩阵补全等
-+ 利用先验知识填充
-+ 分箱，将缺失值单独分为一个箱
-
-   5. 特征构造：
-
-+ 构造**统计量**特征，包括**计数**，**求和**，**比例**，**标准差**等一些统计量
-
-+ **时间**特征，包括相对时间和绝对是件，节假日，双休日等
-
-+ **地理信息**，包括分箱，分布编码等方法，
-
-+ **非线性变换**，包括log/平发/根号等
-
-+ **特征组合**，**特征交叉**
-
-  &gt; 特征组合也叫做特征交叉，但是**合成特征**和特征组合不太一样，特称交叉可以理解为特征组合的一个子集。
-  &gt;
-  &gt; **合成特征**：一种特征，不在输入特征之列，而是从一个或多个输入特征衍生而来。通过标准化或缩放单独创建的特征不属于合成特征。
-  &gt;
-  &gt; ​    包括以下几种类型：
-  &gt;
-  &gt;             1. 将一个特征与其本身或其他特征相乘
-  &gt;                2. 两个特征相除
-  &gt;                3. 对连续特征进行分箱。
-  &gt;
-  &gt; **特称组合**：通过将单独的特征进行组合（相乘或求笛卡尔积）而形成的合成特征。特征组合有助于表示非线性关系。
-
-
-
-   6. 特征筛选
-
-+ **过滤式**（filter）：按照发散性或相关性对各个特征进行评分，设定阈值或者待选择特征的个数进行筛选
-
-  &gt; 基本想法： 分别对每个特征xi，计算xi相对于类别标签y的信息量S(i)，得到n个结果。然后将n个S(i)按照从大到小排序，输出前k个特征。我们的目标是选取与y关联最密切的一些特征xi，那么使用什么样的方法来度量S(i)是一个关键问题。
-  &gt;
-  &gt; 主要有一下几种方法：
-  &gt;
-  &gt; 1. Pearson相关系数
-  &gt; 2. 卡方验证
-  &gt; 3. 互信息和最大信息系数
-  &gt; 4. 距离相关系数
-  &gt; 5. 方差选择法
-
-+ **包裹式**（wrapper）: 根据目标函数（往往是预测效果评分），每次选择若干特征，或者排除若干特征
-
-  &gt; 基本思想：基于hold-out方法，对于每一个待选的特征子集，都在训练集上训练一遍模型，然后在测试集上根据误差大小选择出特征子集。
-  &gt;
-  &gt; 贪婪搜索算法：是局部最优算法。与之对应的是穷举算法，穷举算法是遍历所有可能的组合达到全局最优，但是不太实际
-  &gt;
-  &gt; 1. **前向搜索**：每次增量的从剩余未选中的特征选出一个加入到特征集中，待达到阈值或者n时，从所有F中选出得分最高的特征集。
-  &gt; 2. **后向搜索**：先将F设置为包含全部特征的特征集，然后每次增量的减去特征，直到达到阈值或者为空是，选择最佳的特征集。
-  &gt; 3. **递归特征消除法**：使用一个**基模型**进行多轮训练，每轮训练后通过学习器返回的coef_或者feature_importances_消除哪些权重较底的特征，再基于新的特征集进行下一轮训练。
-
-+ **嵌入式**（embedding）：先使用某些机器学习的模型进行训练，得到各个特征的权值系数，根据系数从大到小选择特征（类似于Filter，只不过系数是通过训练得来的）
-
-  &gt; + 基于惩罚项的特征选择法   通过L1正则项来选择特征：L1正则方法具有稀疏解的特性，因此天然具备特征选择的特性。值得注意的是，L1没有选到的特征不代表不重要，原因是两个具有高相关性的特征可能只保留了一个，如果要确定哪个特征重要需要再通过L2正则方法交叉检验。
-  &gt; + 基于学习模型的特征排序   这种方法的思路是直接使用你要用的机器学习算法，针对每个单独的特征和响应变量建立预测模型。假如某个特征和响应变量之间的关系是非线性的，可以用基于树的方法（决策树、随机森林）、或者扩展的线性模型等。基于树的方法比较易于使用，因为他们对非线性关系的建模比较好，并且不需要太多的调试。但要注意过拟合问题，因此树的深度最好不要太大，再就是运用交叉验证。通过这种训练对特征进行打分获得相关性后再训练最终模型。
-
-   7. 降维
-
-如果你最后特征工程走一遍下来，特征很多的话，最后进行以下降维.
-
-+ PCA/LDA/ICA
-
-+ 特征选择也是一种降维
-
-
-
-#### 2.1 前期准备
-
-导入相关的第三方包
-
+<ul>
+<li><p>PCA/LDA/ICA</p>
+</li>
+<li><p>特征选择也是一种降维</p>
+</li>
+</ul>
+<h4 id="2-1-前期准备"><a href="#2-1-前期准备" class="headerlink" title="2.1 前期准备"></a>2.1 前期准备</h4><p>导入相关的第三方包</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> itemgetter</span><br><span class="line"></span><br><span class="line">%matplotlib inline</span><br></pre></td></tr></table></figure>
 
-
-
-载入数据
-
+<p>载入数据</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">train_data = pd.read_csv(<span class="string">'../data/used_car_train_20200313.csv'</span>, sep=<span class="string">' '</span>)</span><br><span class="line">test_data = pd.read_csv(<span class="string">'../data/user_car_testA_20200313.csv'</span>, sep=<span class="string">' '</span>)</span><br></pre></td></tr></table></figure>
 
-将训练数据与测试数据放在一起，方便处理
-
+<p>将训练数据与测试数据放在一起，方便处理</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">train_data[<span class="string">'train'</span>] = <span class="number">1</span></span><br><span class="line">test_data[<span class="string">'train'</span>] = <span class="number">0</span></span><br><span class="line">data=pd.concat([train_data, test_data], ignore_index=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
 
-
-
-#### 2.2  异常值处理
-
-异常值处理更多是发生在数字特征上，而类别特征最多会出现倾斜的现象，一般这种情况是直接将该特征删除掉。所以，我们通过EDA直到可能会出现异常值的有power、kilemoter以及匿名特征。以`power`为例
-
+<h4 id="2-2-异常值处理"><a href="#2-2-异常值处理" class="headerlink" title="2.2 异常值处理"></a>2.2 异常值处理</h4><p>异常值处理更多是发生在数字特征上，而类别特征最多会出现倾斜的现象，一般这种情况是直接将该特征删除掉。所以，我们通过EDA直到可能会出现异常值的有power、kilemoter以及匿名特征。以<code>power</code>为例</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    观察power的箱型图和柱形图</span></span><br><span class="line">fig, ax = plt.subplots(<span class="number">1</span>, <span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">7</span>))</span><br><span class="line">sns.boxplot(y=data[<span class="string">'power'</span>], data = data, ax=ax[<span class="number">0</span>])</span><br><span class="line">sns.distplot(data[<span class="string">'power'</span>], kde=<span class="literal">False</span>, ax=ax[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
 
-![](https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200327101454.png)
-
-&gt; 从箱型图可以看到缺失存在很多可以认为异常值的值，可以选择将其进行删除，但是现在我们是将训练数据和测试数据一起处理的，如果选择删除不免会将测试数据删除。因此这里我们可以采用用上限值替换异常值。
-
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200327101454.png" alt></p>
+<blockquote>
+<p>从箱型图可以看到缺失存在很多可以认为异常值的值，可以选择将其进行删除，但是现在我们是将训练数据和测试数据一起处理的，如果选择删除不免会将测试数据删除。因此这里我们可以采用用上限值替换异常值。</p>
+</blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">box_plot_outliers</span><span class="params">(data_ser, box_scale)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    利用箱型图的上限值替换异常值</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    iqr = box_scale * (data_ser.quantile(<span class="number">0.75</span>) - data_ser.quantile(<span class="number">0.25</span>))</span><br><span class="line">    val_low = data_ser.quantile(<span class="number">0.25</span>) - iqr</span><br><span class="line">    val_up = data_ser.quantile(<span class="number">0.75</span>) + iqr</span><br><span class="line"></span><br><span class="line">    rule_low = (data_ser &lt; val_low)</span><br><span class="line">    rule_up = (data_ser &gt; val_up)</span><br><span class="line">    index_low = np.arange(data_ser.shape[<span class="number">0</span>])[rule_low]</span><br><span class="line">    index_up = np.arange(data_ser.shape[<span class="number">0</span>])[rule_up]</span><br><span class="line">    <span class="comment">#print(len(index_up))</span></span><br><span class="line">    data.iloc[index_low] = val_low</span><br><span class="line">    data.iloc[index_up] = val_up</span><br><span class="line">    </span><br><span class="line">box_plot_outliers(data[<span class="string">'power'</span>], <span class="number">3</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment">#    重新观察</span></span><br><span class="line">fig, ax = plt.subplots(<span class="number">1</span>, <span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">7</span>))</span><br><span class="line">sns.boxplot(y=data[<span class="string">'power'</span>], data = data, ax=ax[<span class="number">0</span>])</span><br><span class="line">sns.distplot(data[<span class="string">'power'</span>], kde=<span class="literal">False</span>, ax=ax[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
 
-![](https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200327101558.png)
-
-经过异常值处理后，好了很多。
-
-本批数据也出现了数据倾斜的现象。直接将其删除，EDA里有记录的。
-
-#### 2.3 缺失值处理
-
-我们通过EDA知道缺失值不算多，我们后期使用树模型，所以这里不做处理。
-
-#### 2.4 数据分箱
-
-**对车辆使用时间分箱**
-
-&gt; 新车使用10年视为报废，把15%作为不折旧的固定部分为残值，其余85%为浮动折旧值。可分三个阶段：3年~4年~3年来折旧，折旧率分别为11%、10%和9%，前三年每年折11%。
-&gt;
-&gt; 计算公式为：评估价=市场现行新车售价×[15%（不动残值）+85%（浮动值）×（分阶段折旧率）]+评估值。
-
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200327101558.png" alt></p>
+<p>经过异常值处理后，好了很多。</p>
+<p>本批数据也出现了数据倾斜的现象。直接将其删除，EDA里有记录的。</p>
+<h4 id="2-3-缺失值处理"><a href="#2-3-缺失值处理" class="headerlink" title="2.3 缺失值处理"></a>2.3 缺失值处理</h4><p>我们通过EDA知道缺失值不算多，我们后期使用树模型，所以这里不做处理。</p>
+<h4 id="2-4-数据分箱"><a href="#2-4-数据分箱" class="headerlink" title="2.4 数据分箱"></a>2.4 数据分箱</h4><p><strong>对车辆使用时间分箱</strong></p>
+<blockquote>
+<p>新车使用10年视为报废，把15%作为不折旧的固定部分为残值，其余85%为浮动折旧值。可分三个阶段：3年<del>4年</del>3年来折旧，折旧率分别为11%、10%和9%，前三年每年折11%。</p>
+<p>计算公式为：评估价=市场现行新车售价×[15%（不动残值）+85%（浮动值）×（分阶段折旧率）]+评估值。</p>
+</blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用时间：data['creatDate'] - data['regDate']，反应汽车使用时间，一般来说价格与使用时间成反比</span></span><br><span class="line"><span class="comment"># 不过要注意，数据里有时间出错的格式，所以我们需要 errors='coerce'</span></span><br><span class="line">data[<span class="string">'used_time'</span>] = (pd.to_datetime(data[<span class="string">'creatDate'</span>],format=<span class="string">'%Y%m%d'</span>, errors=<span class="string">'coerce'</span>) - </span><br><span class="line">                    pd.to_datetime(data[<span class="string">'regDate'</span>], format=<span class="string">'%Y%m%d'</span>, errors=<span class="string">'coerce'</span>)).dt.days</span><br><span class="line">data[<span class="string">'used_time'</span>]</span><br></pre></td></tr></table></figure>
 
-![](https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200327111633.png)
-
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200327111633.png" alt></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">used_time_bin = [<span class="number">0</span>, <span class="number">1068</span>, <span class="number">2492</span>, <span class="number">3560</span>, <span class="number">5340</span>, <span class="number">100000</span>,np.nan]</span><br><span class="line">data[<span class="string">'used_time_bin'</span>] = pd.cut(data[<span class="string">'used_time'</span>], used_time_bin, labels=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>])</span><br><span class="line">data[[<span class="string">'used_time_bin'</span>,<span class="string">'used_time'</span>]].head()</span><br></pre></td></tr></table></figure>
 
-![](https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200327111712.png)
-
-**对车辆形势公里数分箱**
-
-&gt; 具体为：一部车有效寿命30万公里，将其分为5段，每段6万公里，每段价值依序为新车价的5/15、4/15、3/15、2/15、1/15。假设新车价12万元，已行驶7.5万公里（5年左右），那么该车估值为12万元×（3+3+2+1）÷15=7.2万元。
-
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200327111712.png" alt></p>
+<p><strong>对车辆形势公里数分箱</strong></p>
+<blockquote>
+<p>具体为：一部车有效寿命30万公里，将其分为5段，每段6万公里，每段价值依序为新车价的5/15、4/15、3/15、2/15、1/15。假设新车价12万元，已行驶7.5万公里（5年左右），那么该车估值为12万元×（3+3+2+1）÷15=7.2万元。</p>
+</blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kilometer_bin = [<span class="number">0</span>, <span class="number">6</span>, <span class="number">12</span>, <span class="number">18</span>, <span class="number">24</span>]</span><br><span class="line">data[<span class="string">'kilometer_bin'</span>] = pd.cut(data[<span class="string">'kilometer'</span>], kilometer_bin, labels=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>])</span><br><span class="line">data[[<span class="string">'kilometer_bin'</span>, <span class="string">'kilometer'</span>]].head()</span><br></pre></td></tr></table></figure>
 
-![](https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200327111925.png)
-
-**对发动机功率分箱**
-
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200327111925.png" alt></p>
+<p><strong>对发动机功率分箱</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bin = [i*<span class="number">10</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">31</span>)]</span><br><span class="line">data[<span class="string">'power_bin'</span>] = pd.cut(data[<span class="string">'power'</span>], bin, labels=<span class="literal">False</span>)</span><br><span class="line">data[[<span class="string">'power_bin'</span>, <span class="string">'power'</span>]].head()</span><br></pre></td></tr></table></figure>
 
-![](https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200327112004.png) 
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200327112004.png" alt> </p>
+<h4 id="2-5-构造特征"><a href="#2-5-构造特征" class="headerlink" title="2.5 构造特征"></a>2.5 构造特征</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从邮编中提取城市信息，相当于加入了先验知识</span></span><br><span class="line">data[<span class="string">'city'</span>] = data[<span class="string">'regionCode'</span>].apply(<span class="keyword">lambda</span> x: str(x)[:<span class="number">-3</span>])</span><br><span class="line"></span><br><span class="line">data = data</span><br></pre></td></tr></table></figure>
 
-
-
-#### 2.5 构造特征
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从邮编中提取城市信息，相当于加入了先验知识</span></span><br><span class="line">data[<span class="string">'city'</span>] = data[<span class="string">'regionCode'</span>].apply(<span class="keyword">lambda</span> x: str(x)[:<span class="number">-3</span>])</span><br><span class="line"></span><br><span class="line">data = data</span><br></pre></td></tr></table></figure>
-
-城市的消费水平不同，必然，二手车的价格也就不同。
-
-
-
-我们还可以通过计算训练集中**品牌**、**车型**的**价格**的统计量特征，将其作为特征加入到训练集和测试集中，这相当于加入了先验知识，让模型更好地拟合。
-
+<p>城市的消费水平不同，必然，二手车的价格也就不同。</p>
+<p>我们还可以通过计算训练集中<strong>品牌</strong>、<strong>车型</strong>的<strong>价格</strong>的统计量特征，将其作为特征加入到训练集和测试集中，这相当于加入了先验知识，让模型更好地拟合。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    品牌</span></span><br><span class="line">train_gb = train_data.groupby(<span class="string">'brand'</span>)</span><br><span class="line">all_info = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> kind, kind_data <span class="keyword">in</span> train_gb:</span><br><span class="line">    info = &#123;&#125;</span><br><span class="line">    kind_data = kind_data[kind_data[<span class="string">'price'</span>]&gt;<span class="number">0</span>]</span><br><span class="line">    info[<span class="string">'brand_amount'</span>] = len(kind_data)</span><br><span class="line">    info[<span class="string">'brand_price_max'</span>] = kind_data.price.max()</span><br><span class="line">    info[<span class="string">'brand_price_median'</span>] = kind_data.price.median()</span><br><span class="line">    info[<span class="string">'brand_price_min'</span>] = kind_data.price.min()</span><br><span class="line">    info[<span class="string">'brand_price_sum'</span>] = kind_data.price.sum()</span><br><span class="line">    info[<span class="string">'brand_price_std'</span>] = kind_data.price.std()</span><br><span class="line">    info[<span class="string">'brand_price_average'</span>] = round(kind_data.price.sum()/(len(kind_data) + <span class="number">1</span>), <span class="number">2</span>)</span><br><span class="line">    all_info[kind] = info</span><br><span class="line"></span><br><span class="line">brand_fe = pd.DataFrame(all_info).T.reset_index().rename(columns=&#123;<span class="string">'index'</span>:<span class="string">'brand'</span>&#125;)</span><br><span class="line">data = data.merge(brand_fe, how=<span class="string">'left'</span>, on=<span class="string">'brand'</span>)</span><br><span class="line">data</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    车身类型</span></span><br><span class="line">train_gb = train_data.groupby(<span class="string">'bodyType'</span>)</span><br><span class="line">all_info = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> kind, kind_data <span class="keyword">in</span> train_gb:</span><br><span class="line">    info = &#123;&#125;</span><br><span class="line">    kind_data = kind_data[kind_data[<span class="string">'price'</span>]&gt;<span class="number">0</span>]</span><br><span class="line">    info[<span class="string">'bodyType_amount'</span>] = len(kind_data)</span><br><span class="line">    info[<span class="string">'bodyType_price_max'</span>] = kind_data.price.max()</span><br><span class="line">    info[<span class="string">'bodyType_price_median'</span>] = kind_data.price.median()</span><br><span class="line">    info[<span class="string">'bodyType_price_min'</span>] = kind_data.price.min()</span><br><span class="line">    info[<span class="string">'bodyType_price_sum'</span>] = kind_data.price.sum()</span><br><span class="line">    info[<span class="string">'bodyType_price_std'</span>] = kind_data.price.std()</span><br><span class="line">    info[<span class="string">'bodyType_price_average'</span>] = round(kind_data.price.sum() / (len(kind_data) + <span class="number">1</span>), <span class="number">2</span>)</span><br><span class="line">    all_info[kind] = info</span><br><span class="line"></span><br><span class="line">bodyType_fe = pd.DataFrame(all_info).T.reset_index().rename(columns=&#123;<span class="string">'index'</span>: <span class="string">'bodyType'</span>&#125;)</span><br><span class="line">data = data.merge(bodyType_fe, how=<span class="string">'left'</span>, on=<span class="string">'bodyType'</span>)</span><br></pre></td></tr></table></figure>
 
-**匿名特征**：有些比赛的特征是匿名特征，这导致我们并不清楚特征相互直接的关联性，这时我们就只有单纯基于特征进行处理，比如装箱，groupby，agg 等这样一些操作进行一些特征统计，此外还可以对特征进行进一步的 log，exp 等变换，或者对多个特征进行四则变换
-
+<p><strong>匿名特征</strong>：有些比赛的特征是匿名特征，这导致我们并不清楚特征相互直接的关联性，这时我们就只有单纯基于特征进行处理，比如装箱，groupby，agg 等这样一些操作进行一些特征统计，此外还可以对特征进行进一步的 log，exp 等变换，或者对多个特征进行四则变换</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">15</span>):</span><br><span class="line">    targe = <span class="string">'v_'</span> + str(i)</span><br><span class="line">    data[targe+<span class="string">'_log'</span>] = np.log(data[targe]+<span class="number">1</span>)</span><br><span class="line">    data[targe+<span class="string">'_exp'</span>] = np.exp(data[targe])</span><br></pre></td></tr></table></figure>
 
-
-
-目前的数据已经可以给树模型使用了，所以先导出一下
-
-
-
+<p>目前的数据已经可以给树模型使用了，所以先导出一下</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除不需要的数据</span></span><br><span class="line">data = data.drop([<span class="string">'creatDate'</span>,<span class="string">'regDate'</span>,<span class="string">'regionCode'</span>], axis=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 导出数据</span></span><br><span class="line">data.to_csv(<span class="string">'data_for_tree.csv'</span>, index=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 
-
-
-#### 2.7 特征筛选
-
-特征选择有三种方法，我选择了耗时最短也较为简单的过滤式。因为就如吴恩达老师说的，第一步是应该用短时间撸一个baseline出来。所以，另外两种形式，我撸完baseline再补充。
-
+<h4 id="2-7-特征筛选"><a href="#2-7-特征筛选" class="headerlink" title="2.7 特征筛选"></a>2.7 特征筛选</h4><p>特征选择有三种方法，我选择了耗时最短也较为简单的过滤式。因为就如吴恩达老师说的，第一步是应该用短时间撸一个baseline出来。所以，另外两种形式，我撸完baseline再补充。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    过滤式</span></span><br><span class="line">columns = list(data.columns)</span><br><span class="line">columns.pop(columns.index(<span class="string">'train'</span>))</span><br><span class="line"></span><br><span class="line">corr_dict = &#123;&#125; </span><br><span class="line">corr_list = []</span><br><span class="line"><span class="keyword">for</span> feature <span class="keyword">in</span> columns:</span><br><span class="line">    corr_dict[feature] = np.abs(data[feature].corr(data[<span class="string">'price'</span>], method=<span class="string">'spearman'</span>))</span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> sorted(corr_dict, key=corr_dict.__getitem__, reverse=<span class="literal">True</span>):</span><br><span class="line">    corr_list.append([k, corr_dict[k]])</span><br><span class="line">  </span><br><span class="line">corr_list[:<span class="number">10</span>]</span><br></pre></td></tr></table></figure>
 
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200328202046.png" alt></p>
 
-
-![](https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200328202046.png)</code></pre>
       
     </div>
     
@@ -737,8 +699,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/3019/11/07/去努力维护心中的那点正义/" rel="prev" title="去努力维护心中的那点正义">
-                <i class="fa fa-chevron-left"></i> 去努力维护心中的那点正义
+              <a href="/2020/03/29/入门数据挖掘3-建模与调参/" rel="prev" title="入门数据挖掘3-建模与调参">
+                <i class="fa fa-chevron-left"></i> 入门数据挖掘3-建模与调参
               </a>
             
           </div>
@@ -830,7 +792,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -852,7 +814,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -901,7 +863,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-特征工程"><span class="nav-number">1.</span> <span class="nav-text">2.  特征工程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-特征工程"><span class="nav-number">1.</span> <span class="nav-text">2.  特征工程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-前期准备"><span class="nav-number">1.1.</span> <span class="nav-text">2.1 前期准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-异常值处理"><span class="nav-number">1.2.</span> <span class="nav-text">2.2 异常值处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-缺失值处理"><span class="nav-number">1.3.</span> <span class="nav-text">2.3 缺失值处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-数据分箱"><span class="nav-number">1.4.</span> <span class="nav-text">2.4 数据分箱</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-构造特征"><span class="nav-number">1.5.</span> <span class="nav-text">2.5 构造特征</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-7-特征筛选"><span class="nav-number">1.6.</span> <span class="nav-text">2.7 特征筛选</span></a></li></ol></li></ol></div>
             
 
           </div>

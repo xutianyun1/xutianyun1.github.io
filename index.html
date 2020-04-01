@@ -510,6 +510,240 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/29/入门数据挖掘3-建模与调参/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chris Xu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/haha.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="杀不死。">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/29/入门数据挖掘3-建模与调参/" itemprop="url">入门数据挖掘3-建模与调参</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-29T12:23:11+08:00">
+                2020-03-29
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2020-03-30T15:29:10+08:00">
+                2020-03-30
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据挖掘/" itemprop="url" rel="index">
+                    <span itemprop="name">数据挖掘</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+
+<h3 id="3-建模与调参"><a href="#3-建模与调参" class="headerlink" title="3. 建模与调参"></a>3. 建模与调参</h3><h4 id="3-1-载入数据"><a href="#3-1-载入数据" class="headerlink" title="3.1 载入数据"></a>3.1 载入数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(<span class="string">'ignore'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#    reduce_mem_usage函数通过调整数据类型，帮助我们减少数据在内存中占用的时间</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reduce_mem_usage</span><span class="params">(df)</span>:</span></span><br><span class="line">    </span><br><span class="line">    start_mem = df.memory_usage().sum()</span><br><span class="line">    print(<span class="string">'Memory usage of dataframe is &#123;:.2f&#125; MB'</span>.format(start_mem))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> col <span class="keyword">in</span> df.columns:</span><br><span class="line">        col_type = df[col].dtype</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> col_type != object:</span><br><span class="line">            c_min = df[col].min()</span><br><span class="line">            c_max = df[col].max()</span><br><span class="line">            <span class="keyword">if</span> str(col_type)[:<span class="number">3</span>] == <span class="string">'int'</span>:</span><br><span class="line">                <span class="keyword">if</span> c_min &gt; np.iinfo(np.int8).min <span class="keyword">and</span> c_max &lt; np.iinfo(np.int8).max:</span><br><span class="line">                    df[col] = df[col].astype(np.int8)</span><br><span class="line">                <span class="keyword">elif</span> c_min &gt; np.iinfo(np.int16).min <span class="keyword">and</span> c_max &lt; np.iinfo(np.int16).max:</span><br><span class="line">                    df[col] = df[col].astype(np.int16)</span><br><span class="line">                <span class="keyword">elif</span> c_min &gt; np.iinfo(np.int32).min <span class="keyword">and</span> c_max &lt; np.iinfo(np.int32).max:</span><br><span class="line">                    df[col] = df[col].astype(np.int32)</span><br><span class="line">                <span class="keyword">elif</span> c_min &gt; np.iinfo(np.int64).min <span class="keyword">and</span> c_max &lt; np.iinfo(np.int64).max:</span><br><span class="line">                    df[col] = df[col].astype(np.int64)  </span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> c_min &gt; np.finfo(np.float16).min <span class="keyword">and</span> c_max &lt; np.finfo(np.float16).max:</span><br><span class="line">                    df[col] = df[col].astype(np.float16)</span><br><span class="line">                <span class="keyword">elif</span> c_min &gt; np.finfo(np.float32).min <span class="keyword">and</span> c_max &lt; np.finfo(np.float32).max:</span><br><span class="line">                    df[col] = df[col].astype(np.float32)</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    df[col] = df[col].astype(np.float64)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            df[col] = df[col].astype(<span class="string">'category'</span>)</span><br><span class="line"></span><br><span class="line">    end_mem = df.memory_usage().sum() </span><br><span class="line">    print(<span class="string">'Memory usage after optimization is: &#123;:.2f&#125; MB'</span>.format(end_mem))</span><br><span class="line">    print(<span class="string">'Decreased by &#123;:.1f&#125;%'</span>.format(<span class="number">100</span> * (start_mem - end_mem) / start_mem))</span><br><span class="line">    <span class="keyword">return</span> df  </span><br><span class="line"></span><br><span class="line">sample_feature = reduce_mem_usage(pd.read_csv(<span class="string">'data_for_tree.csv'</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200329122635.png" alt></p>
+<h4 id="3-2-线性回归"><a href="#3-2-线性回归" class="headerlink" title="3.2 线性回归"></a>3.2 线性回归</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">continuous_feature_names = [x <span class="keyword">for</span> x <span class="keyword">in</span> sample_feature.columns <span class="keyword">if</span> x <span class="keyword">not</span> <span class="keyword">in</span> [<span class="string">'price'</span>,<span class="string">'brand'</span>,<span class="string">'model'</span>]]</span><br><span class="line"></span><br><span class="line">sample_feature = sample_feature.dropna().replace(<span class="string">'-'</span>,<span class="number">0</span>).reset_index(drop=<span class="literal">True</span>)</span><br><span class="line">sample_feature</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200329122914.png" alt></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    将非数值型类型转换为数字型类型</span></span><br><span class="line">sample_feature[<span class="string">'notRepairedDamage'</span>] = sample_feature[<span class="string">'notRepairedDamage'</span>].astype(np.float32)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#    划分为特征向量和标签向量</span></span><br><span class="line">train = sample_feature[continuous_feature_names + [<span class="string">'price'</span>]]</span><br><span class="line">train_X = train[continuous_feature_names]</span><br><span class="line">train_y = train[<span class="string">'price'</span>]</span><br></pre></td></tr></table></figure>
+
+<p>使用sklearn简单建模</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line">model = LinearRegression(normalize=<span class="literal">True</span>)</span><br><span class="line">model = model.fit(train_X, train_y)</span><br></pre></td></tr></table></figure>
+
+<p>绘制特征v_9的值与标签的散点图，图片发现模型的预测结果（蓝色点）与真实标签（黑色点）的分布差异较大，且部分预测值出现了<strong>小于0</strong>的情况，说明我们的模型存在一些问题</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line">subsample_index = np.random.randint(low=<span class="number">0</span>, high=len(train_y), size=<span class="number">50</span>)</span><br><span class="line">plt.scatter(train_X[<span class="string">'v_9'</span>][subsample_index], train_y[subsample_index], color=<span class="string">'black'</span>)</span><br><span class="line">plt.scatter(train_X[<span class="string">'v_9'</span>][subsample_index], model.predict(train_X.loc[subsample_index]), color=<span class="string">'blue'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'v_9'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'price'</span>)</span><br><span class="line">plt.legend([<span class="string">'True Price'</span>,<span class="string">'Predicted Price'</span>],loc=<span class="string">'upper right'</span>)</span><br><span class="line">print(<span class="string">'The predicted price is obvious different from true price'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200329123227.png" alt></p>
+<p>这是由于咱们在EDA就发现的情况，即price的分布存在长尾问题，所以我们对price进行log变换后再进行训练。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">train_y_ln = np.log(train_y+<span class="number">1</span>)</span><br><span class="line">model = model.fit(train_X, train_y_ln)</span><br><span class="line">print(<span class="string">'intercept:'</span>+ str(model.intercept_))</span><br><span class="line">sorted(dict(zip(continuous_feature_names, model.coef_)).items(), key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>], reverse=<span class="literal">True</span>)</span><br><span class="line">plt.scatter(train_X[<span class="string">'v_9'</span>][subsample_index], train_y[subsample_index], color=<span class="string">'black'</span>)</span><br><span class="line">plt.scatter(train_X[<span class="string">'v_9'</span>][subsample_index], np.exp(model.predict(train_X.loc[subsample_index])), color=<span class="string">'blue'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'v_9'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'price'</span>)</span><br><span class="line">plt.legend([<span class="string">'True Price'</span>,<span class="string">'Predicted Price'</span>],loc=<span class="string">'upper right'</span>)</span><br><span class="line">print(<span class="string">'The predicted price seems normal after np.log transforming'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200329123421.png" alt></p>
+<p>看起来，已经比上面那张图要好很多。</p>
+<h4 id="3-3-k折交叉验证"><a href="#3-3-k折交叉验证" class="headerlink" title="3.3 k折交叉验证"></a>3.3 k折交叉验证</h4><p>​        在使用训练集对参数进行训练的时候，经常会发现人们通常会将一整个训练集分为三个部分（比如mnist手写训练集）。一般分为：训练集（train_set），评估集（valid_set），测试集（test_set）这三个部分。这其实是为了保证训练效果而特意设置的。其中测试集很好理解，其实就是完全不参与训练的数据，仅仅用来观测测试效果的数据。而训练集和评估集则牵涉到下面的知识了。</p>
+<pre><code>因为在实际的训练中，训练的结果对于训练集的拟合程度通常还是挺好的（初始条件敏感），但是对于训练集之外的数据的拟合程度通常就不那么令人满意了。因此我们通常并不会把所有的数据集都拿来训练，而是分出一部分来（这一部分不参加训练）对训练集生成的参数进行测试，相对客观的判断这些参数对训练集之外的数据的符合程度。这种思想就称为交叉验证（Cross Validation）</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lightgbm <span class="keyword">as</span> lgb</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> StratifiedKFold</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> metrics</span><br><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">pd.set_option(<span class="string">'display.max_columns'</span>, <span class="number">100</span>)</span><br><span class="line">warnings.filterwarnings(<span class="string">'ignore'</span>)</span><br><span class="line"><span class="comment">#     载入数据</span></span><br><span class="line">data = reduce_mem_usage(pd.read_csv(<span class="string">'data_for_tree.csv'</span>))</span><br><span class="line"><span class="comment">#    切分训练集与测试集</span></span><br><span class="line">train_data = data[data[<span class="string">'train'</span>]==<span class="number">1</span>]</span><br><span class="line">test_data = data[data[<span class="string">'train'</span>]==<span class="number">0</span>]</span><br><span class="line"><span class="comment">#    特征</span></span><br><span class="line">features = [x <span class="keyword">for</span> x <span class="keyword">in</span> data.columns <span class="keyword">if</span> x <span class="keyword">not</span> <span class="keyword">in</span> [<span class="string">'price'</span>,<span class="string">'SaleID'</span>]]</span><br><span class="line"><span class="comment">#y = np.log(train_data['price']+1)</span></span><br><span class="line"><span class="comment">#    特征向量以及标签</span></span><br><span class="line">X = train_data[features]</span><br><span class="line">y = train_data[<span class="string">'price'</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#    k折交叉验证</span></span><br><span class="line">k = <span class="number">5</span></span><br><span class="line">fold=StratifiedKFold(n_splits=k,shuffle=<span class="literal">True</span>,random_state=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">models = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> train_idx, val_idx <span class="keyword">in</span> fold.split(X, y):</span><br><span class="line"></span><br><span class="line">    model = lgb.LGBMRegressor(objective=<span class="string">'regression'</span>,num_leaves=<span class="number">31</span>,learning_rate=<span class="number">0.05</span>,n_estimators=<span class="number">2000</span>)</span><br><span class="line">    model.fit(X.iloc[train_idx], y.iloc[train_idx],eval_set=[(X.iloc[val_idx], y.iloc[val_idx])],eval_metric=<span class="string">'l1'</span>,early_stopping_rounds=<span class="number">5</span>)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    models.append(model)</span><br><span class="line">    val_pred = model.predict(X.iloc[val_idx])</span><br><span class="line">    </span><br><span class="line">    score = mean_absolute_error(y.iloc[val_idx],val_pred)</span><br><span class="line">    <span class="comment">#scores.append(score)</span></span><br><span class="line">    print( <span class="string">'--------------'</span>)</span><br><span class="line">    print(<span class="string">'val mae:'</span>, np.mean(score))</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200329200644.png" alt></p>
+<h4 id="3-4-嵌入式特征选择"><a href="#3-4-嵌入式特征选择" class="headerlink" title="3.4 嵌入式特征选择"></a>3.4 嵌入式特征选择</h4><p>嵌入式特征选择是将特征选择过程与学习器训练过程融为一体，两者在同一个优化过程中完成，即在学习器训练过程中自动地进行了特征选择。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> SelectFromModel</span><br><span class="line">clf = lgb.LGBMRegressor()</span><br><span class="line">embeded_lgb_selector = SelectFromModel(clf, max_features=<span class="number">50</span>)</span><br><span class="line">embeded_lgb_selector.fit(X, y)</span><br><span class="line">embeded_lgb_support = embeded_lgb_selector.get_support()</span><br><span class="line">embeded_lgb_feature = X.loc[:,embeded_lgb_support].columns.tolist()</span><br><span class="line">print(str(len(embeded_lgb_feature)), <span class="string">'selected features'</span>) </span><br><span class="line"></span><br><span class="line">embeded_lgb_feature</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200330124006.png" alt></p>
+<blockquote>
+<p>但是我用筛选出来地这27个特征重新做5折交叉验证，效果却比不做特征筛选地要差。</p>
+</blockquote>
+<h4 id="3-5-GridSearchCV-网格搜索调参"><a href="#3-5-GridSearchCV-网格搜索调参" class="headerlink" title="3.5 GridSearchCV 网格搜索调参"></a>3.5 GridSearchCV 网格搜索调参</h4><p><strong>GridSearchCV</strong>：一种调参的方法，当你算法模型效果不是很好时，可以通过该方法来调整参数，通过循环遍历，尝试每一种参数组合，返回最好的得分值的参数组合。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line">objective = [<span class="string">'regression'</span>, <span class="string">'regression_l1'</span>, <span class="string">'mape'</span>, <span class="string">'huber'</span>, <span class="string">'fair'</span>]</span><br><span class="line">num_leaves = [<span class="number">3</span>,<span class="number">5</span>,<span class="number">10</span>,<span class="number">15</span>,<span class="number">20</span>,<span class="number">40</span>, <span class="number">55</span>]</span><br><span class="line">max_depth = [<span class="number">3</span>,<span class="number">5</span>,<span class="number">10</span>,<span class="number">15</span>,<span class="number">20</span>,<span class="number">40</span>, <span class="number">55</span>]</span><br><span class="line">parameters = &#123;<span class="string">'objective'</span>: objective, <span class="string">'num_leaves'</span>: num_leaves, <span class="string">'max_depth'</span>: max_depth&#125;</span><br><span class="line">model = lgb.LGBMRegressor()</span><br><span class="line">clf = GridSearchCV(model, parameters, cv=<span class="number">5</span>)</span><br><span class="line">clf = clf.fit(X, y)</span><br><span class="line">clf.best_params_</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200330152636.png" alt></p>
+<h4 id="3-6-贝叶斯调参"><a href="#3-6-贝叶斯调参" class="headerlink" title="3.6 贝叶斯调参"></a>3.6 贝叶斯调参</h4><p><strong>贝叶斯调参</strong>：贝叶斯优化是一种用模型找到函数最小值方法，已经应用于机器学习问题中的超参数搜索，这种方法性能好，同时比随机搜索省时。贝叶斯优化通过基于目标函数的过去评估结果建立替代函数（概率模型），来找到最小化目标函数的值。贝叶斯方法与随机或网格搜索的不同之处在于，它在尝试下一组超参数时，会参考之前的评估结果，因此可以省去很多无用功。</p>
+<p>​    贝叶斯优化问题的四个部分：</p>
+<pre><code>+  **目标函数**：即我们想要最小化的内容。在这里，目标函数是机器学习模型使用该组超参数在验证集上的损失。
++  **域空间**：要搜索的超参数的取值范围。
++  **优化算法**: 构造替代函数并选择下一个超参数值进行评估的方法。
++  **结果历史记录**：来自目标函数评估的存储结果，包括超参数和验证集上的损失。</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+	<div>
+		
+	</div>
+
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/26/入门数据挖掘2-特征工程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -557,7 +791,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2020-03-28T20:28:53+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2020-03-28T20:35:56+08:00">
                 2020-03-28
               </time>
             
@@ -607,7 +841,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  3.4k
+                  3.3k
                 </span>
               
 
@@ -2085,200 +2319,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/30/python编译报错TypeError_ 'builtin_function_or_method' object is not subscriptable/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chris Xu">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/haha.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="杀不死。">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/30/python编译报错TypeError_ 'builtin_function_or_method' object is not subscriptable/" itemprop="url">python编译报错TypeError_ 'builtin_function_or_method' object is not subscriptable</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-30T16:06:57+08:00">
-                2019-05-30
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Post modified&#58;</span>
-              
-              <time title="Post modified" itemprop="dateModified" datetime="2019-10-16T20:16:26+08:00">
-                2019-10-16
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  49
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>﻿报错代码片段：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">embacked_dict = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> embacked:</span><br><span class="line">    <span class="keyword">if</span> embacked_dict.get[i]:<span class="comment">#此处报错</span></span><br><span class="line">        embacked_dict[i] += <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        embacked_dict[i] = <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<p>此类型错误一般是把函数参数用[ ]传入了，改为()即可</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-	<div>
-		
-	</div>
-
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2333,7 +2373,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2355,7 +2395,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
