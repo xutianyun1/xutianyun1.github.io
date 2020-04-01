@@ -102,14 +102,13 @@
 
 
 
-<meta name="description" content="3. 建模与调参3.1 载入数据123456789101112131415161718192021222324252627282930313233343536373839404142import pandas as pdimport numpy as npimport warningswarnings.filterwarnings(&apos;ignore&apos;)#    reduce_mem_usage函">
 <meta name="keywords" content="数据挖掘,建模,调参">
 <meta property="og:type" content="article">
 <meta property="og:title" content="入门数据挖掘3-建模与调参">
 <meta property="og:url" content="http://yoursite.com/2020/03/29/入门数据挖掘3-建模与调参/index.html">
 <meta property="og:site_name" content="杀不死。">
-<meta property="og:description" content="3. 建模与调参3.1 载入数据123456789101112131415161718192021222324252627282930313233343536373839404142import pandas as pdimport numpy as npimport warningswarnings.filterwarnings(&apos;ignore&apos;)#    reduce_mem_usage函">
 <meta property="og:locale" content="zh">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200329123227.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200329122635.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200329122914.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200329123227.png">
@@ -117,11 +116,10 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200329200644.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200330124006.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200330152636.png">
-<meta property="og:updated_time" content="2020-03-30T07:29:10.539Z">
+<meta property="og:updated_time" content="2020-04-01T12:27:43.699Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="入门数据挖掘3-建模与调参">
-<meta name="twitter:description" content="3. 建模与调参3.1 载入数据123456789101112131415161718192021222324252627282930313233343536373839404142import pandas as pdimport numpy as npimport warningswarnings.filterwarnings(&apos;ignore&apos;)#    reduce_mem_usage函">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200329122635.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200329123227.png">
 
 
 
@@ -364,8 +362,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2020-03-30T15:29:10+08:00">
-                2020-03-30
+              <time title="Post modified" itemprop="dateModified" datetime="2020-04-01T20:27:43+08:00">
+                2020-04-01
               </time>
             
           </span>
@@ -451,7 +449,8 @@
       
 
       
-        <a id="more"></a>
+        <p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200329123227.png" alt></p>
+<a id="more"></a>
 
 <h3 id="3-建模与调参"><a href="#3-建模与调参" class="headerlink" title="3. 建模与调参"></a>3. 建模与调参</h3><h4 id="3-1-载入数据"><a href="#3-1-载入数据" class="headerlink" title="3.1 载入数据"></a>3.1 载入数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(<span class="string">'ignore'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#    reduce_mem_usage函数通过调整数据类型，帮助我们减少数据在内存中占用的时间</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reduce_mem_usage</span><span class="params">(df)</span>:</span></span><br><span class="line">    </span><br><span class="line">    start_mem = df.memory_usage().sum()</span><br><span class="line">    print(<span class="string">'Memory usage of dataframe is &#123;:.2f&#125; MB'</span>.format(start_mem))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> col <span class="keyword">in</span> df.columns:</span><br><span class="line">        col_type = df[col].dtype</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> col_type != object:</span><br><span class="line">            c_min = df[col].min()</span><br><span class="line">            c_max = df[col].max()</span><br><span class="line">            <span class="keyword">if</span> str(col_type)[:<span class="number">3</span>] == <span class="string">'int'</span>:</span><br><span class="line">                <span class="keyword">if</span> c_min &gt; np.iinfo(np.int8).min <span class="keyword">and</span> c_max &lt; np.iinfo(np.int8).max:</span><br><span class="line">                    df[col] = df[col].astype(np.int8)</span><br><span class="line">                <span class="keyword">elif</span> c_min &gt; np.iinfo(np.int16).min <span class="keyword">and</span> c_max &lt; np.iinfo(np.int16).max:</span><br><span class="line">                    df[col] = df[col].astype(np.int16)</span><br><span class="line">                <span class="keyword">elif</span> c_min &gt; np.iinfo(np.int32).min <span class="keyword">and</span> c_max &lt; np.iinfo(np.int32).max:</span><br><span class="line">                    df[col] = df[col].astype(np.int32)</span><br><span class="line">                <span class="keyword">elif</span> c_min &gt; np.iinfo(np.int64).min <span class="keyword">and</span> c_max &lt; np.iinfo(np.int64).max:</span><br><span class="line">                    df[col] = df[col].astype(np.int64)  </span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> c_min &gt; np.finfo(np.float16).min <span class="keyword">and</span> c_max &lt; np.finfo(np.float16).max:</span><br><span class="line">                    df[col] = df[col].astype(np.float16)</span><br><span class="line">                <span class="keyword">elif</span> c_min &gt; np.finfo(np.float32).min <span class="keyword">and</span> c_max &lt; np.finfo(np.float32).max:</span><br><span class="line">                    df[col] = df[col].astype(np.float32)</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    df[col] = df[col].astype(np.float64)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            df[col] = df[col].astype(<span class="string">'category'</span>)</span><br><span class="line"></span><br><span class="line">    end_mem = df.memory_usage().sum() </span><br><span class="line">    print(<span class="string">'Memory usage after optimization is: &#123;:.2f&#125; MB'</span>.format(end_mem))</span><br><span class="line">    print(<span class="string">'Decreased by &#123;:.1f&#125;%'</span>.format(<span class="number">100</span> * (start_mem - end_mem) / start_mem))</span><br><span class="line">    <span class="keyword">return</span> df  </span><br><span class="line"></span><br><span class="line">sample_feature = reduce_mem_usage(pd.read_csv(<span class="string">'data_for_tree.csv'</span>))</span><br></pre></td></tr></table></figure>
 
