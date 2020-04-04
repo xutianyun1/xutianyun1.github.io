@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+  
+  <script>
+  	(function () {
+  		if ('') {
+  			if (prompt('请输入文章密码') !== '') {
+  				alert('密码错误！');
+  				if (history.length === 1) {
+  					location.replace("https://bixiaopeng0.github.io"); // 这里替换成你的首页
+  				} else {
+  					history.back();
+  				}
+  			}
+  		}
+  	})();
+  </script>
+  
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据挖掘,模型融合,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="数据挖掘,模型融合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="入门数据挖掘4-模型融合">
+<meta property="og:url" content="http://yoursite.com/2020/04/03/入门数据挖掘4-模型融合/index.html">
+<meta property="og:site_name" content="杀不死。">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200404103831.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200403101229.png">
+<meta property="og:updated_time" content="2020-04-04T02:39:11.281Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="入门数据挖掘4-模型融合">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200404103831.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/04/03/入门数据挖掘4-模型融合/">
+
+
+
+
+
+  <title>入门数据挖掘4-模型融合 | 杀不死。</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	
+	
+	<a href="https://github.com/xutianyun1" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+	
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">杀不死。</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">越努力，越幸运啊。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/03/入门数据挖掘4-模型融合/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chris Xu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/haha.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="杀不死。">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">入门数据挖掘4-模型融合</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-03T09:59:28+08:00">
+                2020-04-03
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2020-04-04T10:39:11+08:00">
+                2020-04-04
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据挖掘/" itemprop="url" rel="index">
+                    <span itemprop="name">数据挖掘</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  14
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200404103831.jpg" alt></p>
+<a id="more"></a>
+
+
+
+<h3 id="5-模型融合"><a href="#5-模型融合" class="headerlink" title="5. 模型融合"></a>5. 模型融合</h3><p>​    模型融合是在比赛后期一个重要的环节，</p>
+<pre><code> 1. **简单加权融合**：
+          + 回归：算术平均融合，几何平均融合
+          + 分类：投票
+          + 综合：排序融合，log融合
+2. **stacking/blending**:
+
+    + 构建多层模型，并利用预测结果再拟合预测
+3. **boosting/bagging**:
+    + 多树的提升方法</code></pre><h4 id="5-1-Stacking相关理论介绍"><a href="#5-1-Stacking相关理论介绍" class="headerlink" title="5.1 Stacking相关理论介绍"></a>5.1 Stacking相关理论介绍</h4><p>​    stacking: 用初始训练数据学习出若干个基学习器后，将<strong>这几个学习器的预测结果作为新的训练集，来学习一个新的学习器</strong>。</p>
+<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200403101229.png" alt></p>
+<p>​        将个体学习器结合在一起的时候使用的方法叫做<strong>结合策略</strong>。对于<strong>分类</strong>问题，我们使用<strong>投票法</strong>来选择输出最多的类。对于<strong>回归</strong>问题，我们可以将分类器输出的结果求<strong>平均值</strong>。</p>
+<p>​        另一个结合策略就是<strong>Stacking</strong>,使用另外一个机器学习算法来将个体结合在一起。</p>
+<h4 id="5-2-代码示例"><a href="#5-2-代码示例" class="headerlink" title="5.2 代码示例"></a>5.2 代码示例</h4><h5 id="5-2-1-回归-分类概率-融合"><a href="#5-2-1-回归-分类概率-融合" class="headerlink" title="5.2.1 回归\分类概率-融合"></a>5.2.1 回归\分类概率-融合</h5><ol>
+<li><p>简单加权平均，结果直接融合</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 生成一些简单的样本数据，test_prei 代表第i个模型的预测值</span></span><br><span class="line">test_pre1 = [<span class="number">1.2</span>, <span class="number">3.2</span>, <span class="number">2.1</span>, <span class="number">6.2</span>]</span><br><span class="line">test_pre2 = [<span class="number">0.9</span>, <span class="number">3.1</span>, <span class="number">2.0</span>, <span class="number">5.9</span>]</span><br><span class="line">test_pre3 = [<span class="number">1.1</span>, <span class="number">2.9</span>, <span class="number">2.2</span>, <span class="number">6.0</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># y_test_true 代表第模型的真实值</span></span><br><span class="line">y_test_true = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">6</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment">## 定义结果的加权平均函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Weighted_method</span><span class="params">(test_pre1,test_pre2,test_pre3,w=[<span class="number">1</span>/<span class="number">3</span>,<span class="number">1</span>/<span class="number">3</span>,<span class="number">1</span>/<span class="number">3</span>])</span>:</span></span><br><span class="line">    Weighted_result = w[<span class="number">0</span>]*pd.Series(test_pre1)+w[<span class="number">1</span>]*pd.Series(test_pre2)+w[<span class="number">2</span>]*pd.Series(test_pre3)</span><br><span class="line">    <span class="keyword">return</span> Weighted_result</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> metrics</span><br><span class="line"><span class="comment"># 各模型的预测结果计算MAE</span></span><br><span class="line">print(<span class="string">'Pred1 MAE:'</span>,metrics.mean_absolute_error(y_test_true, test_pre1))</span><br><span class="line">print(<span class="string">'Pred2 MAE:'</span>,metrics.mean_absolute_error(y_test_true, test_pre2))</span><br><span class="line">print(<span class="string">'Pred3 MAE:'</span>,metrics.mean_absolute_error(y_test_true, test_pre3))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">out:	Pred1 MAE: 0.175</span><br><span class="line">		Pred2 MAE: 0.075</span><br><span class="line">		Pred3 MAE: 0.1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 根据加权计算MAE</span></span><br><span class="line">w = [<span class="number">0.3</span>,<span class="number">0.4</span>,<span class="number">0.3</span>] <span class="comment"># 定义比重权值</span></span><br><span class="line">Weighted_pre = Weighted_method(test_pre1,test_pre2,test_pre3,w)</span><br><span class="line">print(<span class="string">'Weighted_pre MAE:'</span>,metrics.mean_absolute_error(y_test_true, Weighted_pre))</span><br></pre></td></tr></table></figure>
+
+out: Weighted_pre MAE: 0.0575
+
+可以发现通过加权融合相对于之前的结果是有提升的。
+
+还有一些特殊的形式，比如**mean平均**、**median平均**
+
+2.  Stacking融合（回归）
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> linear_model</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Stacking_method</span><span class="params">(train_reg1,train_reg2,train_reg3,y_train_true,test_pre1,test_pre2,test_pre3,model_L2= linear_model.LinearRegression<span class="params">()</span>)</span>:</span></span><br><span class="line">    model_L2.fit(pd.concat([pd.Series(train_reg1),pd.Series(train_reg2),pd.Series(train_reg3)],axis=<span class="number">1</span>).values,y_train_true)</span><br><span class="line">    Stacking_result = model_L2.predict(pd.concat([pd.Series(test_pre1),pd.Series(test_pre2),pd.Series(test_pre3)],axis=<span class="number">1</span>).values)</span><br><span class="line">    <span class="keyword">return</span> Stacking_result</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 生成一些简单的样本数据，test_prei 代表第i个模型的预测值</span></span><br><span class="line">train_reg1 = [<span class="number">3.2</span>, <span class="number">8.2</span>, <span class="number">9.1</span>, <span class="number">5.2</span>]</span><br><span class="line">train_reg2 = [<span class="number">2.9</span>, <span class="number">8.1</span>, <span class="number">9.0</span>, <span class="number">4.9</span>]</span><br><span class="line">train_reg3 = [<span class="number">3.1</span>, <span class="number">7.9</span>, <span class="number">9.2</span>, <span class="number">5.0</span>]</span><br><span class="line"><span class="comment"># y_test_true 代表第模型的真实值</span></span><br><span class="line">y_train_true = [<span class="number">3</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">5</span>] </span><br><span class="line"></span><br><span class="line">test_pre1 = [<span class="number">1.2</span>, <span class="number">3.2</span>, <span class="number">2.1</span>, <span class="number">6.2</span>]</span><br><span class="line">test_pre2 = [<span class="number">0.9</span>, <span class="number">3.1</span>, <span class="number">2.0</span>, <span class="number">5.9</span>]</span><br><span class="line">test_pre3 = [<span class="number">1.1</span>, <span class="number">2.9</span>, <span class="number">2.2</span>, <span class="number">6.0</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># y_test_true 代表第模型的真实值</span></span><br><span class="line">y_test_true = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">6</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">model_L2= linear_model.LinearRegression()</span><br><span class="line">Stacking_pre = Stacking_method(train_reg1,train_reg2,train_reg3,y_train_true,</span><br><span class="line">                               test_pre1,test_pre2,test_pre3,model_L2)</span><br><span class="line">print(<span class="string">'Stacking_pre MAE:'</span>,metrics.mean_absolute_error(y_test_true, Stacking_pre))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">out: Stacking_pre MAE: 0.0421348314607</span><br></pre></td></tr></table></figure>
+
+​        可以发现模型结果相对于之前有进一步的提升，这是我们需要注意的一点是，对于**第二层Stacking的模型不宜选取的过于复杂**，这样会导致模型在训练集上过拟合，从而使得在测试集上并不能达到很好的效果。</code></pre><h5 id="5-2-2-分类模型融合"><a href="#5-2-2-分类模型融合" class="headerlink" title="5.2.2 分类模型融合"></a>5.2.2 分类模型融合</h5><p>​        对于分类，同样的可以使用融合方法，比如<strong>简单投票</strong>、<strong>Stacking</strong></p>
+<p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> make_blobs</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeClassifier</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> VotingClassifier</span><br><span class="line"><span class="keyword">from</span> xgboost <span class="keyword">import</span> XGBClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> make_moons</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score,roc_auc_score</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_score</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> StratifiedKFold</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>Voting投票机制</p>
+<p>分为<strong>软投票</strong>和<strong>硬投票</strong>两种，原理是<strong>少数服从多数</strong>的思想</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">硬投票：对多个模型直接进行投票，不区分模型结果的相对重要度，最终投票数最多的类为最终被预测的类。</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line"></span><br><span class="line">x=iris.data</span><br><span class="line">y=iris.target</span><br><span class="line">x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line">clf1 = XGBClassifier(learning_rate=<span class="number">0.1</span>, n_estimators=<span class="number">150</span>, max_depth=<span class="number">3</span>, min_child_weight=<span class="number">2</span>, subsample=<span class="number">0.7</span>,</span><br><span class="line">                     colsample_bytree=<span class="number">0.6</span>, objective=<span class="string">'binary:logistic'</span>)</span><br><span class="line">clf2 = RandomForestClassifier(n_estimators=<span class="number">50</span>, max_depth=<span class="number">1</span>, min_samples_split=<span class="number">4</span>,</span><br><span class="line">                              min_samples_leaf=<span class="number">63</span>,oob_score=<span class="literal">True</span>)</span><br><span class="line">clf3 = SVC(C=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 硬投票</span></span><br><span class="line">eclf = VotingClassifier(estimators=[(<span class="string">'xgb'</span>, clf1), (<span class="string">'rf'</span>, clf2), (<span class="string">'svc'</span>, clf3)], voting=<span class="string">'hard'</span>)</span><br><span class="line"><span class="keyword">for</span> clf, label <span class="keyword">in</span> zip([clf1, clf2, clf3, eclf], [<span class="string">'XGBBoosting'</span>, <span class="string">'Random Forest'</span>, <span class="string">'SVM'</span>, <span class="string">'Ensemble'</span>]):</span><br><span class="line">    scores = cross_val_score(clf, x, y, cv=<span class="number">5</span>, scoring=<span class="string">'accuracy'</span>)</span><br><span class="line">    print(<span class="string">"Accuracy: %0.2f (+/- %0.2f) [%s]"</span> % (scores.mean(), scores.std(), label))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">软投票：和硬投票原理相同，增加了设置权重的功能，可以为不同模型设置不同权重，进而区别模型不同的重要度。</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">x=iris.data</span><br><span class="line">y=iris.target</span><br><span class="line">x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line">clf1 = XGBClassifier(learning_rate=<span class="number">0.1</span>, n_estimators=<span class="number">150</span>, max_depth=<span class="number">3</span>, min_child_weight=<span class="number">2</span>, subsample=<span class="number">0.8</span>,</span><br><span class="line">                     colsample_bytree=<span class="number">0.8</span>, objective=<span class="string">'binary:logistic'</span>)</span><br><span class="line">clf2 = RandomForestClassifier(n_estimators=<span class="number">50</span>, max_depth=<span class="number">1</span>, min_samples_split=<span class="number">4</span>,</span><br><span class="line">                              min_samples_leaf=<span class="number">63</span>,oob_score=<span class="literal">True</span>)</span><br><span class="line">clf3 = SVC(C=<span class="number">0.1</span>, probability=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 软投票</span></span><br><span class="line">eclf = VotingClassifier(estimators=[(<span class="string">'xgb'</span>, clf1), (<span class="string">'rf'</span>, clf2), (<span class="string">'svc'</span>, clf3)], voting=<span class="string">'soft'</span>, weights=[<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>])</span><br><span class="line">clf1.fit(x_train, y_train)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> clf, label <span class="keyword">in</span> zip([clf1, clf2, clf3, eclf], [<span class="string">'XGBBoosting'</span>, <span class="string">'Random Forest'</span>, <span class="string">'SVM'</span>, <span class="string">'Ensemble'</span>]):</span><br><span class="line">    scores = cross_val_score(clf, x, y, cv=<span class="number">5</span>, scoring=<span class="string">'accuracy'</span>)</span><br><span class="line">    print(<span class="string">"Accuracy: %0.2f (+/- %0.2f) [%s]"</span> % (scores.mean(), scores.std(), label))</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>分类的Stacking\Blending融合</li>
+</ol>
+<p><strong>stacking</strong>是一种分层模型集成框架，以两层为例，第一层由多个基学习器组成，其输入为原始训练集，第二层的模型则是以第一层基学习器的输出作为训练集进行再训练，从而得到完整的stacking模型, stacking两层模型都使用了全部的训练数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">5-Fold Stacking</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> ExtraTreesClassifier,GradientBoostingClassifier</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="comment">#创建训练的数据集</span></span><br><span class="line">data_0 = iris.data</span><br><span class="line">data = data_0[:<span class="number">100</span>,:]</span><br><span class="line"></span><br><span class="line">target_0 = iris.target</span><br><span class="line">target = target_0[:<span class="number">100</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#模型融合中使用到的各个单模型</span></span><br><span class="line">clfs = [LogisticRegression(solver=<span class="string">'lbfgs'</span>),</span><br><span class="line">        RandomForestClassifier(n_estimators=<span class="number">5</span>, n_jobs=<span class="number">-1</span>, criterion=<span class="string">'gini'</span>),</span><br><span class="line">        ExtraTreesClassifier(n_estimators=<span class="number">5</span>, n_jobs=<span class="number">-1</span>, criterion=<span class="string">'gini'</span>),</span><br><span class="line">        ExtraTreesClassifier(n_estimators=<span class="number">5</span>, n_jobs=<span class="number">-1</span>, criterion=<span class="string">'entropy'</span>),</span><br><span class="line">        GradientBoostingClassifier(learning_rate=<span class="number">0.05</span>, subsample=<span class="number">0.5</span>, max_depth=<span class="number">6</span>, n_estimators=<span class="number">5</span>)]</span><br><span class="line"> </span><br><span class="line"><span class="comment">#切分一部分数据作为测试集</span></span><br><span class="line">X, X_predict, y, y_predict = train_test_split(data, target, test_size=<span class="number">0.3</span>, random_state=<span class="number">2020</span>)</span><br><span class="line"></span><br><span class="line">dataset_blend_train = np.zeros((X.shape[<span class="number">0</span>], len(clfs)))</span><br><span class="line">dataset_blend_test = np.zeros((X_predict.shape[<span class="number">0</span>], len(clfs)))</span><br><span class="line"></span><br><span class="line"><span class="comment">#5折stacking</span></span><br><span class="line">n_splits = <span class="number">5</span></span><br><span class="line">skf = StratifiedKFold(n_splits)</span><br><span class="line">skf = skf.split(X, y)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> j, clf <span class="keyword">in</span> enumerate(clfs):</span><br><span class="line">    <span class="comment">#依次训练各个单模型</span></span><br><span class="line">    dataset_blend_test_j = np.zeros((X_predict.shape[<span class="number">0</span>], <span class="number">5</span>))</span><br><span class="line">    <span class="keyword">for</span> i, (train, test) <span class="keyword">in</span> enumerate(skf):</span><br><span class="line">        <span class="comment">#5-Fold交叉训练，使用第i个部分作为预测，剩余的部分来训练模型，获得其预测的输出作为第i部分的新特征。</span></span><br><span class="line">        X_train, y_train, X_test, y_test = X[train], y[train], X[test], y[test]</span><br><span class="line">        clf.fit(X_train, y_train)</span><br><span class="line">        y_submission = clf.predict_proba(X_test)[:, <span class="number">1</span>]</span><br><span class="line">        dataset_blend_train[test, j] = y_submission</span><br><span class="line">        dataset_blend_test_j[:, i] = clf.predict_proba(X_predict)[:, <span class="number">1</span>]</span><br><span class="line">    <span class="comment">#对于测试集，直接用这k个模型的预测值均值作为新的特征。</span></span><br><span class="line">    dataset_blend_test[:, j] = dataset_blend_test_j.mean(<span class="number">1</span>)</span><br><span class="line">    print(<span class="string">"val auc Score: %f"</span> % roc_auc_score(y_predict, dataset_blend_test[:, j]))</span><br><span class="line"></span><br><span class="line">clf = LogisticRegression(solver=<span class="string">'lbfgs'</span>)</span><br><span class="line">clf.fit(dataset_blend_train, y)</span><br><span class="line">y_submission = clf.predict_proba(dataset_blend_test)[:, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Val auc Score of Stacking: %f"</span> % (roc_auc_score(y_predict, y_submission)))</span><br></pre></td></tr></table></figure>
+
+<p><strong>Blending</strong>：其实和Stacking是一种类似的多层模型融合的形式。其主要思路是把原始的训练集先分成两部分，比如70%的数据作为新的训练集，剩下30%的数据作为测试集。在第一层，我们在这70%的数据上训练多个模型，然后去预测那30%数据的label，同时也预测test集的label。在第二层，我们就直接用这30%数据在第一层预测的结果做为新特征继续训练，然后用test集第一层预测的label做特征，用第二层训练的模型做进一步预测</p>
+<p>其优点在于：</p>
+<ul>
+<li>1.比stacking简单（因为不用进行k次的交叉验证来获得stacker feature）</li>
+<li>2.避开了一个信息泄露问题：generlizers和stacker使用了不一样的数据集 </li>
+</ul>
+<p>缺点在于： </p>
+<ul>
+<li>1.使用了很少的数据（第二阶段的blender只使用training set10%的量）</li>
+<li>2.blender可能会过拟合</li>
+<li>3.stacking使用多次的交叉验证会比较稳健 </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">Blending</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#创建训练的数据集</span></span><br><span class="line"><span class="comment">#创建训练的数据集</span></span><br><span class="line">data_0 = iris.data</span><br><span class="line">data = data_0[:<span class="number">100</span>,:]</span><br><span class="line"></span><br><span class="line">target_0 = iris.target</span><br><span class="line">target = target_0[:<span class="number">100</span>]</span><br><span class="line"> </span><br><span class="line"><span class="comment">#模型融合中使用到的各个单模型</span></span><br><span class="line">clfs = [LogisticRegression(solver=<span class="string">'lbfgs'</span>),</span><br><span class="line">        RandomForestClassifier(n_estimators=<span class="number">5</span>, n_jobs=<span class="number">-1</span>, criterion=<span class="string">'gini'</span>),</span><br><span class="line">        RandomForestClassifier(n_estimators=<span class="number">5</span>, n_jobs=<span class="number">-1</span>, criterion=<span class="string">'entropy'</span>),</span><br><span class="line">        ExtraTreesClassifier(n_estimators=<span class="number">5</span>, n_jobs=<span class="number">-1</span>, criterion=<span class="string">'gini'</span>),</span><br><span class="line">        <span class="comment">#ExtraTreesClassifier(n_estimators=5, n_jobs=-1, criterion='entropy'),</span></span><br><span class="line">        GradientBoostingClassifier(learning_rate=<span class="number">0.05</span>, subsample=<span class="number">0.5</span>, max_depth=<span class="number">6</span>, n_estimators=<span class="number">5</span>)]</span><br><span class="line"> </span><br><span class="line"><span class="comment">#切分一部分数据作为测试集</span></span><br><span class="line">X, X_predict, y, y_predict = train_test_split(data, target, test_size=<span class="number">0.3</span>, random_state=<span class="number">2020</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#切分训练数据集为d1,d2两部分</span></span><br><span class="line">X_d1, X_d2, y_d1, y_d2 = train_test_split(X, y, test_size=<span class="number">0.5</span>, random_state=<span class="number">2020</span>)</span><br><span class="line">dataset_d1 = np.zeros((X_d2.shape[<span class="number">0</span>], len(clfs)))</span><br><span class="line">dataset_d2 = np.zeros((X_predict.shape[<span class="number">0</span>], len(clfs)))</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> j, clf <span class="keyword">in</span> enumerate(clfs):</span><br><span class="line">    <span class="comment">#依次训练各个单模型</span></span><br><span class="line">    clf.fit(X_d1, y_d1)</span><br><span class="line">    y_submission = clf.predict_proba(X_d2)[:, <span class="number">1</span>]</span><br><span class="line">    dataset_d1[:, j] = y_submission</span><br><span class="line">    <span class="comment">#对于测试集，直接用这k个模型的预测值作为新的特征。</span></span><br><span class="line">    dataset_d2[:, j] = clf.predict_proba(X_predict)[:, <span class="number">1</span>]</span><br><span class="line">    print(<span class="string">"val auc Score: %f"</span> % roc_auc_score(y_predict, dataset_d2[:, j]))</span><br><span class="line"></span><br><span class="line"><span class="comment">#融合使用的模型</span></span><br><span class="line">clf = GradientBoostingClassifier(learning_rate=<span class="number">0.02</span>, subsample=<span class="number">0.5</span>, max_depth=<span class="number">6</span>, n_estimators=<span class="number">30</span>)</span><br><span class="line">clf.fit(dataset_d1, y_d2)</span><br><span class="line">y_submission = clf.predict_proba(dataset_d2)[:, <span class="number">1</span>]</span><br><span class="line">print(<span class="string">"Val auc Score of Blending: %f"</span> % (roc_auc_score(y_predict, y_submission)))</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>分类的Stacking融合</li>
+</ol>
+</li>
+</ol>
+<pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">!pip install mlxtend</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(<span class="string">'ignore'</span>)</span><br><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib.gridspec <span class="keyword">as</span> gridspec</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.naive_bayes <span class="keyword">import</span> GaussianNB </span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestClassifier</span><br><span class="line"><span class="keyword">from</span> mlxtend.classifier <span class="keyword">import</span> StackingClassifier</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_score</span><br><span class="line"><span class="keyword">from</span> mlxtend.plotting <span class="keyword">import</span> plot_learning_curves</span><br><span class="line"><span class="keyword">from</span> mlxtend.plotting <span class="keyword">import</span> plot_decision_regions</span><br><span class="line"></span><br><span class="line"><span class="comment"># 以python自带的鸢尾花数据集为例</span></span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line">X, y = iris.data[:, <span class="number">1</span>:<span class="number">3</span>], iris.target</span><br><span class="line"></span><br><span class="line">clf1 = KNeighborsClassifier(n_neighbors=<span class="number">1</span>)</span><br><span class="line">clf2 = RandomForestClassifier(random_state=<span class="number">1</span>)</span><br><span class="line">clf3 = GaussianNB()</span><br><span class="line">lr = LogisticRegression()</span><br><span class="line">sclf = StackingClassifier(classifiers=[clf1, clf2, clf3], </span><br><span class="line">                          meta_classifier=lr)</span><br><span class="line"></span><br><span class="line">label = [<span class="string">'KNN'</span>, <span class="string">'Random Forest'</span>, <span class="string">'Naive Bayes'</span>, <span class="string">'Stacking Classifier'</span>]</span><br><span class="line">clf_list = [clf1, clf2, clf3, sclf]</span><br><span class="line"></span><br><span class="line">fig = plt.figure(figsize=(<span class="number">10</span>,<span class="number">8</span>))</span><br><span class="line">gs = gridspec.GridSpec(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">grid = itertools.product([<span class="number">0</span>,<span class="number">1</span>],repeat=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">clf_cv_mean = []</span><br><span class="line">clf_cv_std = []</span><br><span class="line"><span class="keyword">for</span> clf, label, grd <span class="keyword">in</span> zip(clf_list, label, grid):</span><br><span class="line">        </span><br><span class="line">    scores = cross_val_score(clf, X, y, cv=<span class="number">3</span>, scoring=<span class="string">'accuracy'</span>)</span><br><span class="line">    print(<span class="string">"Accuracy: %.2f (+/- %.2f) [%s]"</span> %(scores.mean(), scores.std(), label))</span><br><span class="line">    clf_cv_mean.append(scores.mean())</span><br><span class="line">    clf_cv_std.append(scores.std())</span><br><span class="line">        </span><br><span class="line">    clf.fit(X, y)</span><br><span class="line">    ax = plt.subplot(gs[grd[<span class="number">0</span>], grd[<span class="number">1</span>]])</span><br><span class="line">    fig = plot_decision_regions(X=X, y=y, clf=clf)</span><br><span class="line">    plt.title(label)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></code></pre><h4 id="5-2-3-一些其他方法"><a href="#5-2-3-一些其他方法" class="headerlink" title="5.2.3 一些其他方法"></a>5.2.3 一些其他方法</h4><p>将特征放进模型中预测，并将预测结果变换并作为新的特征加入原有特征中再经过模型预测结果。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Ensemble_add_feature</span><span class="params">(train,test,target,clfs)</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># n_flods = 5</span></span><br><span class="line">    <span class="comment"># skf = list(StratifiedKFold(y, n_folds=n_flods))</span></span><br><span class="line"></span><br><span class="line">    train_ = np.zeros((train.shape[<span class="number">0</span>],len(clfs*<span class="number">2</span>)))</span><br><span class="line">    test_ = np.zeros((test.shape[<span class="number">0</span>],len(clfs*<span class="number">2</span>)))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> j,clf <span class="keyword">in</span> enumerate(clfs):</span><br><span class="line">        <span class="string">'''依次训练各个单模型'''</span></span><br><span class="line">        <span class="comment"># print(j, clf)</span></span><br><span class="line">        <span class="string">'''使用第1个部分作为预测，第2部分来训练模型，获得其预测的输出作为第2部分的新特征。'''</span></span><br><span class="line">        <span class="comment"># X_train, y_train, X_test, y_test = X[train], y[train], X[test], y[test]</span></span><br><span class="line"></span><br><span class="line">        clf.fit(train,target)</span><br><span class="line">        y_train = clf.predict(train)</span><br><span class="line">        y_test = clf.predict(test)</span><br><span class="line"></span><br><span class="line">        <span class="comment">## 新特征生成</span></span><br><span class="line">        train_[:,j*<span class="number">2</span>] = y_train**<span class="number">2</span></span><br><span class="line">        test_[:,j*<span class="number">2</span>] = y_test**<span class="number">2</span></span><br><span class="line">        train_[:, j+<span class="number">1</span>] = np.exp(y_train)</span><br><span class="line">        test_[:, j+<span class="number">1</span>] = np.exp(y_test)</span><br><span class="line">        <span class="comment"># print("val auc Score: %f" % r2_score(y_predict, dataset_d2[:, j]))</span></span><br><span class="line">        print(<span class="string">'Method '</span>,j)</span><br><span class="line">    </span><br><span class="line">    train_ = pd.DataFrame(train_)</span><br><span class="line">    test_ = pd.DataFrame(test_)</span><br><span class="line">    <span class="keyword">return</span> train_,test_</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_score, train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line">clf = LogisticRegression()</span><br><span class="line"></span><br><span class="line">data_0 = iris.data</span><br><span class="line">data = data_0[:<span class="number">100</span>,:]</span><br><span class="line"></span><br><span class="line">target_0 = iris.target</span><br><span class="line">target = target_0[:<span class="number">100</span>]</span><br><span class="line"></span><br><span class="line">x_train,x_test,y_train,y_test=train_test_split(data,target,test_size=<span class="number">0.3</span>)</span><br><span class="line">x_train = pd.DataFrame(x_train) ; x_test = pd.DataFrame(x_test)</span><br><span class="line"></span><br><span class="line"><span class="comment">#模型融合中使用到的各个单模型</span></span><br><span class="line">clfs = [LogisticRegression(),</span><br><span class="line">        RandomForestClassifier(n_estimators=<span class="number">5</span>, n_jobs=<span class="number">-1</span>, criterion=<span class="string">'gini'</span>),</span><br><span class="line">        ExtraTreesClassifier(n_estimators=<span class="number">5</span>, n_jobs=<span class="number">-1</span>, criterion=<span class="string">'gini'</span>),</span><br><span class="line">        ExtraTreesClassifier(n_estimators=<span class="number">5</span>, n_jobs=<span class="number">-1</span>, criterion=<span class="string">'entropy'</span>),</span><br><span class="line">        GradientBoostingClassifier(learning_rate=<span class="number">0.05</span>, subsample=<span class="number">0.5</span>, max_depth=<span class="number">6</span>, n_estimators=<span class="number">5</span>)]</span><br><span class="line"></span><br><span class="line">New_train,New_test = Ensemble_add_feature(x_train,x_test,y_train,clfs)</span><br><span class="line"></span><br><span class="line">clf = LogisticRegression()</span><br><span class="line"><span class="comment"># clf = GradientBoostingClassifier(learning_rate=0.02, subsample=0.5, max_depth=6, n_estimators=30)</span></span><br><span class="line">clf.fit(New_train, y_train)</span><br><span class="line">y_emb = clf.predict_proba(New_test)[:, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Val auc Score of stacking: %f"</span> % (roc_auc_score(y_test, y_emb)))</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-4-经验总结"><a href="#5-4-经验总结" class="headerlink" title="5.4 经验总结"></a>5.4 经验总结</h4><p>比赛的融合这个问题，个人的看法来说其实涉及多个层面，也是提分和提升模型鲁棒性的一种重要方法：</p>
+<ul>
+<li>1）<strong>结果层面的融合</strong>，这种是最常见的融合方法，其可行的融合方法也有很多，比如根据结果的得分进行加权融合，还可以做Log，exp处理等。在做结果融合的时候，有一个很重要的条件是模型结果的得分要比较近似，然后结果的差异要比较大，这样的结果融合往往有比较好的效果提升。</li>
+<li>2）<strong>特征层面的融合</strong>，这个层面其实感觉不叫融合，准确说可以叫分割，很多时候如果我们用同种模型训练，可以把特征进行切分给不同的模型，然后在后面进行模型或者结果融合有时也能产生比较好的效果。</li>
+<li>3）<strong>模型层面的融合</strong>，模型层面的融合可能就涉及模型的堆叠和设计，比如加Staking层，部分模型的结果作为特征输入等，这些就需要多实验和思考了，基于模型层面的融合最好不同模型类型要有一定的差异，用同种模型不同的参数的收益一般是比较小的。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+	<div>
+		
+			
+<div style="text-align:center;color: #ccc;font-size:14px;">
+------ 本文结束 ------</div>
+
+
+		
+	</div>
+
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据挖掘/" rel="tag"># 数据挖掘</a>
+          
+            <a href="/tags/模型融合/" rel="tag"># 模型融合</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/3019/11/07/去努力维护心中的那点正义/" rel="prev" title="去努力维护心中的那点正义">
+                <i class="fa fa-chevron-left"></i> 去努力维护心中的那点正义
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/29/入门数据挖掘3-建模与调参/" rel="next" title="入门数据挖掘3-建模与调参">
+                入门数据挖掘3-建模与调参 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/haha.jpg" alt="Chris Xu">
+            
+              <p class="site-author-name" itemprop="name">Chris Xu</p>
+              <p class="site-description motion-element" itemprop="description">越努力，越幸运啊。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xutianyun1" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xutianyunch@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-模型融合"><span class="nav-number">1.</span> <span class="nav-text">5. 模型融合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-Stacking相关理论介绍"><span class="nav-number">1.1.</span> <span class="nav-text">5.1 Stacking相关理论介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-代码示例"><span class="nav-number">1.2.</span> <span class="nav-text">5.2 代码示例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-2-1-回归-分类概率-融合"><span class="nav-number">1.2.1.</span> <span class="nav-text">5.2.1 回归\分类概率-融合</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-2-2-分类模型融合"><span class="nav-number">1.2.2.</span> <span class="nav-text">5.2.2 分类模型融合</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-3-一些其他方法"><span class="nav-number">1.3.</span> <span class="nav-text">5.2.3 一些其他方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-经验总结"><span class="nav-number">1.4.</span> <span class="nav-text">5.4 经验总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chris Xu</span>
+
+  
+</div>
+
+
+<!--  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+-->
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
