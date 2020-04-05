@@ -15,6 +15,48 @@
       </tags>
   </entry>
   <entry>
+    <title>机器学习里的模型融合</title>
+    <url>/2020/04/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E9%87%8C%E7%9A%84%E6%A8%A1%E5%9E%8B%E8%9E%8D%E5%90%88/</url>
+    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200405215108.png" alt></p>
+<a id="more"></a>
+
+<p>​        <strong>模型融合</strong>为什么能够可以让两个或多个模型的预测能力得以提升呢。之前，我打过两场数据竞赛了，基本是都死在初赛，20%的名次，但我都没有用过模型融合，因为我一直不理解。下面举一个简单的例子：</p>
+<p>​        就像玩吃鸡一样，当然，咱们玩玩就是为了大家凑一伙，一起图个乐。但是，如果突然有一天，你的小伙伴提出来：咱们打的这么好，咱去打职业联赛吧。这个时候，吃鸡的目标就不一样了，你们眼中就只有胜利了，这个时候，你们要组一只战队，有两个人员方案：</p>
+<blockquote>
+<pre><code>1. 四个钢枪很厉害的。
+2. 一个钢枪厉害，一个擅长玩狙击枪，一个机动性强，一个脑子特别灵活擅长指挥。</code></pre></blockquote>
+<p>​        因此，<strong>融合模型</strong>就是结合不同子模型的长处，如果子模型有<strong>独立</strong>且<strong>互补</strong>的长处，我们融合后的最终输出就能有所提升。子模型独立是很难的，因为子模型一般不存在独立性。因此，<strong>如果子模型的错误不同且互补，那么正确融合多个子模型就可以得到一个更好的模型。</strong></p>
+<p>​        一个好的模型融合，其融合的子模型应该符合俩个假设：</p>
+<ol>
+<li><p><strong>准确性</strong>：大部分子模型要能对最终输出有所帮助，至少要比随机猜测要准确。也就是说，要想模型融合后分数有所提升，至少你要融合的子模型的预测能力要强。</p>
+</li>
+<li><p><strong>多样性</strong>：子模型间需要有所不同，长处和短处各异，这个很好理解，你找几个很相关的子模型去融合，最终的结果也不会有所帮助。</p>
+<p>也就是说，我们想做一个好的模型融合，那么我们就需要保证子模型的<strong>准确性</strong>和<strong>多样性</strong>。但是显然这这是矛盾的。</p>
+</li>
+</ol>
+<p>​        准确性，是我们在搭建子模型的时候需要考虑，好的特征工程，好的模型以及好的模型参数。因为我们做模型融合一定是在建模调参后面，即我们已经做好了准确性的模型。那么，多样性就是我们在做模型融合的时候最重要的。</p>
+<p>​        多样性，要求我们要有尽可能不相关的子模型。</p>
+<pre><code>1. **选用不同类型的分类器**：比如逻辑回归，lgb等不同的模型，在整个数据集上训练，此时，模型的多样性在**不同的模型对数据有不同的表达能力**。代表算法：**Stacking**。
+ 2. **选用同类型的分类器，但使用不同的参数**：此时，模型的多样性体现在**不同的超参数在同一模型上的差异**所决定的。
+ 3. **相同的分类器，但在不同的训练集上进行训练**： 显然，模型的多样性体现在**数据的差异性**。
+ 4. **使用相同的分类器，但在不同的特征上进行训练**：和3一样，模型的多样性仍然体现在**数据的差异性**。这样的做法，考虑了在不同的超空间上，模型有不同的泛化误差，最终融合可以得到互补的效果。</code></pre><p>常见的boosting是顺序模型，他的多样性来自于<strong>子模型对于不同样本所赋予的权重上的差异</strong>，从某个角度上看其实可以归类到方法2中。</p>
+<p>以上四种方法是基本操作，我们可以组合使用。</p>
+<p>但值得注意的是，手动融合模型时一般很少构造大量的弱分类器，而是精挑细选少量的强模型进行融合，</p>
+<p>​    </p>
+<blockquote>
+<p>参考 ： 机器学习中如何融合多种特征或分类方法？ - 微调的回答 - 知乎 <a href="https://www.zhihu.com/question/24598447/answer/383717513" target="_blank" rel="noopener">https://www.zhihu.com/question/24598447/answer/383717513</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>数据挖掘</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>数据挖掘</tag>
+        <tag>模型融合</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>入门数据挖掘4-模型融合</title>
     <url>/2020/04/03/%E5%85%A5%E9%97%A8%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%984-%E6%A8%A1%E5%9E%8B%E8%9E%8D%E5%90%88/</url>
     <content><![CDATA[<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200404103831.jpg" alt></p>
@@ -23,15 +65,16 @@
 
 
 <h3 id="5-模型融合"><a href="#5-模型融合" class="headerlink" title="5. 模型融合"></a>5. 模型融合</h3><p>​    模型融合是在比赛后期一个重要的环节，</p>
-<pre><code> 1. **简单加权融合**：
-          + 回归：算术平均融合，几何平均融合
-          + 分类：投票
-          + 综合：排序融合，log融合
-2. **stacking/blending**:
+<pre><code>1. **简单加权融合**：
+    + 回归：算术平均融合，几何平均融合
+    + 分类：投票
+    + 综合：排序融合，log融合
 
-    + 构建多层模型，并利用预测结果再拟合预测
-3. **boosting/bagging**:
-    + 多树的提升方法</code></pre><h4 id="5-1-Stacking相关理论介绍"><a href="#5-1-Stacking相关理论介绍" class="headerlink" title="5.1 Stacking相关理论介绍"></a>5.1 Stacking相关理论介绍</h4><p>​    stacking: 用初始训练数据学习出若干个基学习器后，将<strong>这几个学习器的预测结果作为新的训练集，来学习一个新的学习器</strong>。</p>
+2. **stacking/blending**:
++ 构建多层模型，并利用预测结果再拟合预测</code></pre><ol start="3">
+<li><strong>boosting/bagging</strong>:<pre><code>+ 多树的提升方法</code></pre></li>
+</ol>
+<h4 id="5-1-Stacking相关理论介绍"><a href="#5-1-Stacking相关理论介绍" class="headerlink" title="5.1 Stacking相关理论介绍"></a>5.1 Stacking相关理论介绍</h4><p>​    stacking: 用初始训练数据学习出若干个基学习器后，将<strong>这几个学习器的预测结果作为新的训练集，来学习一个新的学习器</strong>。</p>
 <p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200403101229.png" alt></p>
 <p>​        将个体学习器结合在一起的时候使用的方法叫做<strong>结合策略</strong>。对于<strong>分类</strong>问题，我们使用<strong>投票法</strong>来选择输出最多的类。对于<strong>回归</strong>问题，我们可以将分类器输出的结果求<strong>平均值</strong>。</p>
 <p>​        另一个结合策略就是<strong>Stacking</strong>,使用另外一个机器学习算法来将个体结合在一起。</p>

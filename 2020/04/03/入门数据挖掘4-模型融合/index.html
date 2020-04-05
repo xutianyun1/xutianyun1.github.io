@@ -110,7 +110,7 @@
 <meta property="og:locale" content="zh">
 <meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200404103831.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200403101229.png">
-<meta property="og:updated_time" content="2020-04-04T02:39:11.281Z">
+<meta property="og:updated_time" content="2020-04-05T11:50:02.630Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="入门数据挖掘4-模型融合">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200404103831.jpg">
@@ -356,8 +356,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2020-04-04T10:39:11+08:00">
-                2020-04-04
+              <time title="Post modified" itemprop="dateModified" datetime="2020-04-05T19:50:02+08:00">
+                2020-04-05
               </time>
             
           </span>
@@ -449,15 +449,16 @@
 
 
 <h3 id="5-模型融合"><a href="#5-模型融合" class="headerlink" title="5. 模型融合"></a>5. 模型融合</h3><p>​    模型融合是在比赛后期一个重要的环节，</p>
-<pre><code> 1. **简单加权融合**：
-          + 回归：算术平均融合，几何平均融合
-          + 分类：投票
-          + 综合：排序融合，log融合
-2. **stacking/blending**:
+<pre><code>1. **简单加权融合**：
+    + 回归：算术平均融合，几何平均融合
+    + 分类：投票
+    + 综合：排序融合，log融合
 
-    + 构建多层模型，并利用预测结果再拟合预测
-3. **boosting/bagging**:
-    + 多树的提升方法</code></pre><h4 id="5-1-Stacking相关理论介绍"><a href="#5-1-Stacking相关理论介绍" class="headerlink" title="5.1 Stacking相关理论介绍"></a>5.1 Stacking相关理论介绍</h4><p>​    stacking: 用初始训练数据学习出若干个基学习器后，将<strong>这几个学习器的预测结果作为新的训练集，来学习一个新的学习器</strong>。</p>
+2. **stacking/blending**:
++ 构建多层模型，并利用预测结果再拟合预测</code></pre><ol start="3">
+<li><strong>boosting/bagging</strong>:<pre><code>+ 多树的提升方法</code></pre></li>
+</ol>
+<h4 id="5-1-Stacking相关理论介绍"><a href="#5-1-Stacking相关理论介绍" class="headerlink" title="5.1 Stacking相关理论介绍"></a>5.1 Stacking相关理论介绍</h4><p>​    stacking: 用初始训练数据学习出若干个基学习器后，将<strong>这几个学习器的预测结果作为新的训练集，来学习一个新的学习器</strong>。</p>
 <p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200403101229.png" alt></p>
 <p>​        将个体学习器结合在一起的时候使用的方法叫做<strong>结合策略</strong>。对于<strong>分类</strong>问题，我们使用<strong>投票法</strong>来选择输出最多的类。对于<strong>回归</strong>问题，我们可以将分类器输出的结果求<strong>平均值</strong>。</p>
 <p>​        另一个结合策略就是<strong>Stacking</strong>,使用另外一个机器学习算法来将个体结合在一起。</p>
@@ -586,8 +587,8 @@ out: Weighted_pre MAE: 0.0575
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/3019/11/07/去努力维护心中的那点正义/" rel="prev" title="去努力维护心中的那点正义">
-                <i class="fa fa-chevron-left"></i> 去努力维护心中的那点正义
+              <a href="/2020/04/05/机器学习里的模型融合/" rel="prev" title="机器学习里的模型融合">
+                <i class="fa fa-chevron-left"></i> 机器学习里的模型融合
               </a>
             
           </div>
@@ -679,7 +680,7 @@ out: Weighted_pre MAE: 0.0575
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
