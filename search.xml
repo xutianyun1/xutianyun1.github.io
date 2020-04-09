@@ -15,6 +15,37 @@
       </tags>
   </entry>
   <entry>
+    <title>jupyter切换虚拟环境</title>
+    <url>/2020/04/09/jupyter%E5%88%87%E6%8D%A2%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200409175716.png" alt></p>
+<a id="more"></a>
+
+
+
+<p>​    今天想安装一个tensorflow，于是新开了一个虚拟环境，但是发现jupyter notebook中并没有这个虚拟环境。下面为解决方法：</p>
+<ol>
+<li><p>切换至这个新开的虚拟环境</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">activate tfpy3</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装ipykernel</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">conda install ipykernel</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后执行这个语句，重新打开jupyter即可</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">python -m ipykernel install --name tfpy3</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>BugLog</category>
+      </categories>
+      <tags>
+        <tag>jupyter notebook</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>机器学习里的模型融合</title>
     <url>/2020/04/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E9%87%8C%E7%9A%84%E6%A8%A1%E5%9E%8B%E8%9E%8D%E5%90%88/</url>
     <content><![CDATA[<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/20200405215108.png" alt></p>
