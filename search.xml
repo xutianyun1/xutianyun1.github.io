@@ -15,6 +15,58 @@
       </tags>
   </entry>
   <entry>
+    <title>vscode配置环境运行C++</title>
+    <url>/2020/12/14/vscode%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E8%BF%90%E8%A1%8CC++/</url>
+    <content><![CDATA[<p>VScode只是一个文本编辑器，所以我们可以下载各种扩展来编译调试多种语言，比如C/C++、python、java。这篇blog介绍一下如何在VScode中运行一个打印hello world的程序。</p>
+<ol>
+<li><p>下载vscode，这步到官网下载安装即可，不再赘述</p>
+</li>
+<li><p>下载编译器：<a href="https://sourceforge.net/projects/mingw-w64/files/" target="_blank" rel="noopener">https://sourceforge.net/projects/mingw-w64/files/</a>  选最新版本的<code>x86_64-posix-seh</code>。 将其接压到一个不被轻易删除的位置，然后在环境变量和系统变量中的<code>path</code>添加，比如我是放在了<code>D:\IDE</code>目录中，那么就在path中添加<code>D:\IDE\mingw64\bin</code>即可。在cmd中输入gcc -v可验证是否添加成功。</p>
+</li>
+<li><p>在vscode中安装扩展：<code>C\C++</code>、<code>code Runner</code>（好像无法debug）<code>Chinese</code>是微软推出的汉化扩展（安装好重启即可汉化）。</p>
+<p><img src="http://qlblnd236.hn-bkt.clouddn.com/image-20201214165127146.png" alt="image-20201214165127146"></p>
+</li>
+<li><p>在你要存放目录的文件下，新建一个文件夹，此文件夹专门用来存放C++的代码文件。这里我新建的文件夹为CPP</p>
+</li>
+<li><p>在vscode中选择新打开文件，选中该文件打开，</p>
+</li>
+</ol>
+<p><img src="http://qlblnd236.hn-bkt.clouddn.com/image-20201214164147836.png" alt="image-20201214164147836"></p>
+<p>​        之后，在工作目录区，如上图所示，在CPP文件下新建一个<code>.vscode</code>文件夹，并新建三个json文件。</p>
+<p>​        launch.json</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">// https://code.visualstudio.com/docs/cpp/launch-json-reference </span><br><span class="line">&#123; </span><br><span class="line">    <span class="attr">"version"</span>: <span class="string">"0.2.0"</span>, </span><br><span class="line">    <span class="attr">"configurations"</span>: [&#123; </span><br><span class="line">        "name": "(gdb) Launch", // 配置名称，将会在启动配置的下拉菜单中显示 </span><br><span class="line">        "type": "cppdbg", // 配置类型，cppdbg对应cpptools提供的调试功能；可以认为此处只能是cppdbg </span><br><span class="line">        "request": "launch", // 请求配置类型，可以为launch（启动）或attach（附加） </span><br><span class="line">        "program": "$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;.exe", // 将要进行调试的程序的路径 </span><br><span class="line">        "args": [], // 程序调试时传递给程序的命令行参数，一般设为空即可 </span><br><span class="line">        "stopAtEntry": false, // 设为true时程序将暂停在程序入口处，相当于在main上打断点 </span><br><span class="line">        "cwd": "$&#123;fileDirname&#125;", // 调试程序时的工作目录，此为工作区文件夹；改成$&#123;fileDirname&#125;可变为文件所在目录 </span><br><span class="line">        "environment": [], // 环境变量 </span><br><span class="line">        "externalConsole": true, // 使用单独的cmd窗口，与其它IDE一致；为false时使用内置终端 </span><br><span class="line">        "internalConsoleOptions": "neverOpen", // 如果不设为neverOpen，调试时会跳到“调试控制台”选项卡，你应该不需要对gdb手动输命令吧？ </span><br><span class="line">        "MIMode": "gdb", // 指定连接的调试器，可以为gdb或lldb。但我没试过lldb </span><br><span class="line">        "miDebuggerPath": "gdb.exe", // 调试器路径，Windows下后缀不能省略，Linux下则不要 </span><br><span class="line">        "setupCommands": [ &#123; // 模板自带，好像可以更好地显示STL容器的内容，具体作用自行Google </span><br><span class="line">            "description": "Enable pretty-printing for gdb", </span><br><span class="line">            "text": "-enable-pretty-printing", </span><br><span class="line">            "ignoreFailures": false </span><br><span class="line">            &#125; </span><br><span class="line">        ], </span><br><span class="line">        "preLaunchTask": "Compile" // 调试会话开始前执行的任务，一般为编译程序。与tasks.json的label相对应 </span><br><span class="line">        &#125;] </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​        tasks.json</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">// https://code.visualstudio.com/docs/editor/tasks </span><br><span class="line">&#123; </span><br><span class="line">    <span class="attr">"version"</span>: <span class="string">"2.0.0"</span>, </span><br><span class="line">    <span class="attr">"tasks"</span>: [&#123; </span><br><span class="line">        "label": "Compile", // 任务名称，与launch.json的preLaunchTask相对应 </span><br><span class="line">        "command": "g++", // 要使用的编译器，C++用g++ </span><br><span class="line">        "args": [ </span><br><span class="line">            "$&#123;file&#125;",</span><br><span class="line">             "-o", // 指定输出文件名，不加该参数则默认输出a.exe，Linux下默认a.out </span><br><span class="line">             "$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;.exe", </span><br><span class="line">             "-g", // 生成和调试有关的信息 </span><br><span class="line">             "-m64", // 不知为何有时会生成16位应用而无法运行，加上此条可强制生成64位的 </span><br><span class="line">             "-Wall", // 开启额外警告 </span><br><span class="line">             "-static-libgcc", // 静态链接libgcc，一般都会加上 </span><br><span class="line">             "-fexec-charset=GBK", // 生成的程序使用GBK编码，不加这条会导致Win下输出中文乱码；繁体系统改成BIG5 // </span><br><span class="line">             "-std=c++14", // 要用的语言标准，根据自己的需要修改。c++可用c++14 </span><br><span class="line">             ], // 编译的命令，其实相当于VSC帮你在终端中输了这些东西 </span><br><span class="line">             "type": "process", // process是把预定义变量和转义解析后直接全部传给command；shell相当于先打开shell再输入命令，所以args还会经过shell再解析一遍 </span><br><span class="line">             "group": &#123; </span><br><span class="line">                 "kind": "build", </span><br><span class="line">                 "isDefault": true // 不为true时ctrl shift B就要手动选择了 </span><br><span class="line">            &#125;, </span><br><span class="line">            "presentation": &#123; </span><br><span class="line">                "echo": true, </span><br><span class="line">                "reveal": "always", // 执行任务时是否跳转到终端面板，可以为always，silent，never。具体参见VSC的文档 </span><br><span class="line">                "focus": false, // 设为true后可以使执行task时焦点聚集在终端，但对编译C/C++来说，设为true没有意义 </span><br><span class="line">                "panel": "shared" // 不同的文件的编译信息共享一个终端面板 </span><br><span class="line">            &#125;,</span><br><span class="line">            "problemMatcher":"$gcc" // 捕捉编译时终端里的报错信息到问题面板中，修改代码后需要重新编译才会再次触发 // 本来有Lint，再开problemMatcher就有双重报错，但MinGW的Lint效果实在太差了；用Clang可以注释掉 </span><br><span class="line">        &#125;] </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>settings.json</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">&#123; </span><br><span class="line">    "files.defaultLanguage": "c", // ctrl+N新建文件后默认的语言 </span><br><span class="line">    "editor.formatOnType": true, // 输入分号(C/C++的语句结束标识)后自动格式化当前这一行的代码 </span><br><span class="line">    "editor.suggest.snippetsPreventQuickSuggestions": false, // clangd的snippets有很多的跳转点，不用这个就必须手动触发Intellisense了 </span><br><span class="line">    "editor.acceptSuggestionOnEnter": "off", // 我个人的习惯，按回车时一定是真正的换行，只有tab才会接受Intellisense // </span><br><span class="line">    "editor.snippetSuggestions": "top", // （可选）snippets显示在补全列表顶端，默认是inline </span><br><span class="line">    "code-runner.runInTerminal": true, // 设置成false会在“输出”中输出，无法输入 </span><br><span class="line">    "code-runner.executorMap": &#123; </span><br><span class="line">        "c": "gcc '$fileName' -o '$fileNameWithoutExt.exe' -Wall -O2 -m64 -lm -static-libgcc -std=c11 -fexec-charset=GBK &amp;&amp; &amp;'./$fileNameWithoutExt.exe'", </span><br><span class="line">        "cpp": "g++ '$fileName' -o '$fileNameWithoutExt.exe' -Wall -O2 -m64 -static-libgcc -std=c++14 -fexec-charset=GBK &amp;&amp; &amp;'./$fileNameWithoutExt.exe'" </span><br><span class="line">        // "c": "gcc $fileName -o $fileNameWithoutExt.exe -Wall -O2 -m64 -lm -static-libgcc -std=c11 -fexec-charset=GBK &amp;&amp; $dir$fileNameWithoutExt.exe", </span><br><span class="line">        // "cpp": "g++ $fileName -o $fileNameWithoutExt.exe -Wall -O2 -m64 -static-libgcc -std=c++14 -fexec-charset=GBK &amp;&amp; $dir$fileNameWithoutExt.exe" </span><br><span class="line">        &#125;, // 右键run code时运行的命令；未注释的仅适用于PowerShell（Win10默认）和pwsh，文件名中有空格也可以编译运行；注释掉的适用于cmd（win7默认）、PS和bash，但文件名中有空格时无法运行 </span><br><span class="line">        "code-runner.saveFileBeforeRun": true, // run code前保存 "code-runner.preserveFocus": true, // 若为false，run code后光标会聚焦到终端上。如果需要频繁输入数据可设为false </span><br><span class="line">        "code-runner.clearPreviousOutput": false, // 每次run code前清空属于code runner的终端消息，默认false </span><br><span class="line">        "code-runner.ignoreSelection": true, // 默认为false，效果是鼠标选中一块代码后可以单独执行，但C是编译型语言，不适合这样用 </span><br><span class="line">        "code-runner.fileDirectoryAsCwd": true, // 将code runner终端的工作目录切换到文件目录再运行，对依赖cwd的程序产生影响；如果为false，executorMap要加cd $dir </span><br><span class="line">        "C_Cpp.clang_format_sortIncludes": true, // 格式化时调整include的顺序（按字母排序） </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<pre><code>6.  对于c_cpp_properties.json文件，如果你确定不需要使用别人的库，则不需要创建，cpptools会自动使用默认的设置。如果你自己编写了头文件，又不在工作目录文件下，或需要使用别人的库，就需要手动创建这个文件并放在.vscode文件夹下，模块参考https://github.com/Microsoft/vscode-cpptools/blob/master/Documentation/LanguageServer/MinGW.md
+7.  编写代码的时候，只需要在cpp文件下新建一个文件夹，该文件夹和.vscode同目录下，然后在新建的文件夹下，新家一个.cpp结尾的文件即可</code></pre><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"hello word!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​        运行以上代码段。</p>
+<p>!<a href="C:\Users\xutia\AppData\Roaming\Typora\typora-user-images\image-20201214164916037.png" target="_blank" rel="noopener">image-20201214164916037</a><img src="http://qlblnd236.hn-bkt.clouddn.com/image-20201214164916037.png" alt="image-20201214164916037"></p>
+<p>终端输出如下，则表示编译成功。</p>
+<p><img src="http://qlblnd236.hn-bkt.clouddn.com/image-20201214164949046.png" alt="image-20201214164949046"></p>
+<p>PS: 有一点小问题就是，vscode里是使用<code>tab</code>键补全，超级不爽，需要改用<code>enter</code>键补全。</p>
+<p><img src="http://qlblnd236.hn-bkt.clouddn.com/image-20201214173327633.png" alt="image-20201214173327633"></p>
+<p>如上图所示，文件-&gt;首选项-&gt;键盘快捷方式 或者使用快捷键的方式 alt+F -&gt;p -&gt;k</p>
+<p>之后点击红圈圈住的按钮，会打开keybindings.json的文件</p>
+<p><img src="http://qlblnd236.hn-bkt.clouddn.com/image-20201214173551946.png" alt="image-20201214173551946"></p>
+<p>在这个keybindings.json中添加以下代码即可。</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"> &#123;</span><br><span class="line">     <span class="attr">"key"</span>: <span class="string">"enter"</span>, </span><br><span class="line">     <span class="attr">"command"</span>: <span class="string">"acceptSelectedSuggestion"</span>,</span><br><span class="line">     <span class="attr">"when"</span>: <span class="string">"editorTextFocus &amp;&amp; suggestWidgetVisible"</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>‘C\C++’</category>
+      </categories>
+      <tags>
+        <tag>VSCode</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>入门NLP-task2-数据探索</title>
     <url>/2020/07/22/%E5%85%A5%E9%97%A8NLP-task2-%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2/</url>
     <content><![CDATA[<p>–真的没有图片–</p>
@@ -95,34 +147,6 @@
       <tags>
         <tag>自然语言处理</tag>
         <tag>nlp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python更换图片背景颜色</title>
-    <url>/2020/06/16/python%E6%9B%B4%E6%8D%A2%E5%9B%BE%E7%89%87%E8%83%8C%E6%99%AF%E9%A2%9C%E8%89%B2/</url>
-    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/img1.jpg" alt></p>
-<a id="more"></a>
-
-
-
-<p>哇，好久没写blog了，在家里都闲出病来了。  </p>
-<p>今天，女朋友找了一对情侣头像，就是下面两幅</p>
-<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/2.jpg" alt></p>
-<p><img src="https://raw.githubusercontent.com/xutianyun1/cloudimage/master/img/1.jpg" alt></p>
-<p>然后她说她比较喜欢酒后色，想让Science那张的背景颜色也是酒后色的。</p>
-<p>ok，到了大龙天威的时候了。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">img = Image.open(<span class="string">'1.jpg'</span>)</span><br><span class="line">r, g, b = img.getpixel((<span class="number">3</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line">img1 = Image.open(<span class="string">'2.jpg'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">635</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">635</span>):</span><br><span class="line">        rgb = img1.getpixel((i, j))</span><br><span class="line">        <span class="keyword">if</span> rgb[<span class="number">0</span>] &lt; <span class="number">50</span> <span class="keyword">and</span> rgb[<span class="number">1</span>] &lt; <span class="number">50</span> <span class="keyword">and</span> rgb[<span class="number">2</span>] &lt; <span class="number">50</span>:</span><br><span class="line"></span><br><span class="line">            img1.putpixel((i, j), (r, g, b))</span><br><span class="line">img1.save(<span class="string">'img1.jpg'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>Pillow库的安装方法<code>pip install Pillow</code></p>
-<p>换来了女朋友的夸奖，呀，呀，这才是我写代码的乐趣呀。嘿嘿嘿</p>
-<p>（用github做图床是真的难受，一直加载不出来。–小声bb）</p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>图像处理</tag>
       </tags>
   </entry>
   <entry>
