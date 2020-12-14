@@ -17,7 +17,10 @@
   <entry>
     <title>vscode配置环境运行C++</title>
     <url>/2020/12/14/vscode%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E8%BF%90%E8%A1%8CC++/</url>
-    <content><![CDATA[<p>VScode只是一个文本编辑器，所以我们可以下载各种扩展来编译调试多种语言，比如C/C++、python、java。这篇blog介绍一下如何在VScode中运行一个打印hello world的程序。</p>
+    <content><![CDATA[<p><img src="http://qlblnd236.hn-bkt.clouddn.com/image-20201214194737484.png" alt="image-20201214194737484"></p>
+<a id="more"></a>
+
+<p>VScode只是一个文本编辑器，所以我们可以下载各种扩展来编译调试多种语言，比如C/C++、python、java。这篇blog介绍一下如何在VScode中运行一个打印hello world的程序。</p>
 <ol>
 <li><p>下载vscode，这步到官网下载安装即可，不再赘述</p>
 </li>
@@ -92,8 +95,8 @@
         <category>‘自然语言处理’</category>
       </categories>
       <tags>
-        <tag>NLP</tag>
         <tag>自然语言处理</tag>
+        <tag>NLP</tag>
       </tags>
   </entry>
   <entry>
@@ -145,8 +148,8 @@
         <category>自然语言处理</category>
       </categories>
       <tags>
-        <tag>自然语言处理</tag>
         <tag>nlp</tag>
+        <tag>自然语言处理</tag>
       </tags>
   </entry>
   <entry>
